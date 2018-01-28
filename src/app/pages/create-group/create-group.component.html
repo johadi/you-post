@@ -1,0 +1,29 @@
+<app-nav-bar></app-nav-bar>
+<div class="container-fluid n1">
+  <div class="row">
+    <div class="col-sm-3 pl-0">
+      <app-side-bar></app-side-bar>
+    </div>
+    <div class="col-sm-9 pl-0 pr-0" id="main">
+      <div class="p-3" style="height: 93vh; overflow-y: scroll;">
+        <div class="col-8 offset-2 pt-5">
+          <div class="card pb-5 pt-1 pr-5 pl-5">
+            <div class="card-body">
+              <p class="text-display text-center">Create your group and start adding members</p>
+              <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+                <div class="form-group">
+                  <input formControlName="name" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success btn-block btn-dark">Create group</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

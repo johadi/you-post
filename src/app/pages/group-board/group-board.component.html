@@ -1,0 +1,50 @@
+<app-nav-bar></app-nav-bar>
+<div class="container-fluid n1">
+  <div class="row">
+    <div class="col-sm-3 pl-0">
+      <app-side-bar></app-side-bar>
+    </div>
+    <div class="col-sm-9 pl-0 pr-0" id="main">
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+              <a class="btn btn-outline-display nav-link btn-sm text-display" routerLink="/group">
+                <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                Messages
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-display" routerLink="/group/send-message">
+                <i class="fa fa-commenting" aria-hidden="true"></i>
+                Post message
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-display" routerLink="/group/users">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                Group members
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-display" routerLink="/group/add-user">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                Add user
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="#">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                Exit group
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="p-3" style="height: 83vh; overflow-y: scroll;">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
