@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +10,9 @@ export class HomeComponent implements OnInit {
   display = 'none';
   show: boolean;
 
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.userService.getApi()
-      .subscribe((response) => console.log('-------->', response));
   }
   // Placed in a the .ts file
   openModal() {

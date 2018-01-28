@@ -19,14 +19,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "./assets/font-awesome/css/font-awesome.min.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "miscellaneous/font-awesome/css/font-awesome.min.css",
+        "miscellaneous/bootstrapv4/css/bootstrap.min.css",
         "styles.scss"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        "miscellaneous/bootstrapv4/js/bootstrap.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
