@@ -9,6 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start:dev": "nodemon --watch server --exec babel-node -- app.js",
+    "migrate": "sequelize db:migrate",
     "start": "node app.compile",
     "build": "ng build",
     "heroku-postbuild": "ng build --aot -prod",
@@ -46,7 +47,7 @@
     "nodemailer": "^4.4.1",
     "nodemailer-express-handlebars": "^2.0.0",
     "nodemon": "^1.12.7",
-    "pg": "^7.4.0",
+    "pg": "^6.4.0",
     "popper.js": "^1.12.9",
     "rxjs": "^5.5.2",
     "sequelize": "^3.30.2",

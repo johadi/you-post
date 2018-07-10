@@ -42,27 +42,38 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username">
+        <form [formGroup]="signupForm">
+          <div *ngIf="signupErrorMessage" class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{signupErrorMessage}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="fullname" placeholder="Full name">
+            <input type="text" formControlName="username" class="form-control" name="username" placeholder="Username">
+            <small *ngIf="signupValidationError['username']" class="form-text text-danger">{{signupValidationError['username']}}</small>
           </div>
           <div class="form-group">
-            <input type="email" class="form-control" name="email" aria-describedby="emailSignupHelp" placeholder="Email">
-            <small id="emailSignupHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <input formControlName="fullname" type="text" class="form-control" name="fullname" placeholder="Full name">
+            <small *ngIf="signupValidationError['fullname']" class="form-text text-danger">{{signupValidationError['fullname']}}</small>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="mobile" placeholder="Mobile number">
+            <input formControlName="email" type="email" class="form-control" name="email" aria-describedby="emailSignupHelp" placeholder="Email">
+            <small *ngIf="signupValidationError['email']" class="form-text text-danger">{{signupValidationError['email']}}</small>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <input formControlName="mobile" type="text" class="form-control" name="mobile" placeholder="Mobile number">
+            <small *ngIf="signupValidationError['mobile']" class="form-text text-danger">{{signupValidationError['mobile']}}</small>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm password">
+            <input formControlName="password" type="password" class="form-control" name="password" placeholder="Password">
+            <small *ngIf="signupValidationError['password']" class="form-text text-danger">{{signupValidationError['password']}}</small>
           </div>
-          <button type="submit" class="btn btn-primary btn-display">Signup</button>
+          <div class="form-group">
+            <input formControlName="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm password">
+            <small *ngIf="signupValidationError['confirmPassword']" class="form-text text-danger">{{signupValidationError['confirmPassword']}}</small>
+          </div>
+          <button  (click)="onSignup()" type="submit" class="btn btn-primary btn-display">Signup</button>
         </form>
         <br>
         <p>Already have an account ? <a data-dismiss="modal" data-toggle="modal" href="#signinModal">login</a></p>
