@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,8 +15,14 @@ export class HomeComponent implements OnInit {
   signupForm: FormGroup;
   signupValidationError = {};
   signupErrorMessage: string;
+  signinForm: FormGroup;
+  signinValidationError = {};
+  signinErrorMessage: string;
+  @ViewChild('signupClose') signupClose: ElementRef;
+  @ViewChild('signinClose') signinClose: ElementRef;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
+  }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -26,19 +33,23 @@ export class HomeComponent implements OnInit {
       password: [''],
       confirmPassword: ['']
     });
+
+    this.signinForm = this.formBuilder.group({
+      username: [''],
+      password: ['']
+    });
   }
 
   onSignup() {
-    console.log('FORM', this.signupForm.get('username'));
     this.authService.signup(this.signupForm.value)
       .toPromise()
       .then((result) => {
-        localStorage.setItem('token', result);
         this.signupValidationError = {};
         this.signupErrorMessage = '';
+        this.saveTokenAndRedirect(result, this.signupClose);
       })
       .catch((err) => {
-        const { message } = err;
+        const {message} = err;
 
         if (typeof message === 'string') {
           this.signupValidationError = {};
@@ -53,12 +64,36 @@ export class HomeComponent implements OnInit {
 
       });
   }
-  // Placed in a the .ts file
-  openModal() {
-    this.display = 'block';
-    this.show = true;
+
+  onSignin() {
+    this.authService.signin(this.signinForm.value)
+      .toPromise()
+      .then((result) => {
+        localStorage.setItem('token', result);
+        this.signinValidationError = {};
+        this.signinErrorMessage = '';
+        this.saveTokenAndRedirect(result, this.signinClose);
+      })
+      .catch((err) => {
+        const {message} = err;
+
+        if (typeof message === 'string') {
+          this.signinValidationError = {};
+          this.signinErrorMessage = message;
+        } else if (typeof message === 'object' && message.validateError) {
+          this.signinErrorMessage = '';
+          this.signinValidationError = message.validateError;
+        } else {
+          this.signinValidationError = {};
+          this.signinErrorMessage = 'Something went wrong. Try again.';
+        }
+
+      });
   }
-  onCloseHandled() {
-    this.display = 'none';
+
+  private saveTokenAndRedirect(token, closeElement) {
+    localStorage.setItem('token', token);
+    closeElement.nativeElement.click();
+    this.router.navigate(['/dashboard']);
   }
 }

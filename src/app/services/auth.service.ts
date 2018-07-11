@@ -19,6 +19,11 @@ export class AuthService {
       .catch(this.handleError);
   }
 
+  signin(userCredentials) {
+    return this.http.post(`${this.apiBaseUrl}/v1/user/signin`, userCredentials)
+      .catch(this.handleError);
+  }
+
   private handleError(error: HttpErrorResponse) {
     const errorBody: any = {};
     if (error.error instanceof ErrorEvent) {
