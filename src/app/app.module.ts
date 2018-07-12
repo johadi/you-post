@@ -17,9 +17,9 @@ import { httpInterceptorProviders } from './interceptors';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
-    PagesModule
+    PagesModule,
+    AppRoutingModule
   ],
   providers: [UserService, AuthService, GroupService, httpInterceptorProviders],
   bootstrap: [AppComponent]

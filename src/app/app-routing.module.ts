@@ -12,15 +12,26 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {CreateGroupComponent} from './pages/create-group/create-group.component';
 import {GroupMessagesComponent} from './pages/group-messages/group-messages.component';
 import {AddUserComponent} from './pages/add-user/add-user.component';
+import { IndexPageComponent } from './pages/index-page/index-page.component';
+import { UserResolverService } from './resolvers/user-resolver.service';
 
 const routes: Routes = [
-  { path: '', component:  HomeComponent },
-  { path: 'create-group', component:  CreateGroupComponent },
-  { path: 'groups', component:  GroupsComponent },
-  { path: 'dashboard', component:  DashboardComponent },
+  { path: '', component:  IndexPageComponent },
+  { path: 'gru', component:  AddUserComponent },
+  {
+    path: 'dashboard',
+    component: HomeComponent,
+    resolve: { userResolver: UserResolverService },
+    children: [
+      { path: '', component:  DashboardComponent },
+      { path: 'create-group', component:  CreateGroupComponent },
+      { path: 'groups', component:  GroupsComponent },
+    ]
+  },
   {
     path: 'group',
     component:  GroupBoardComponent,
+    resolve: { userResolver: UserResolverService },
     children: [
       { path: '', component: GroupMessagesComponent  },
       { path: 'users', component:  GroupUsersComponent },
@@ -34,6 +45,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [UserResolverService]
 })
 export class AppRoutingModule { }
