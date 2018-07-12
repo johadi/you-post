@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+interface UserDetailsI {
+  username: string;
+  fullname: string;
+  email: string;
+  mobile?: string;
+}
 
 @Component({
   selector: 'app-side-bar',
@@ -6,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent implements OnInit {
+
+  @Input() userDetails: UserDetailsI;
 
   constructor() { }
 

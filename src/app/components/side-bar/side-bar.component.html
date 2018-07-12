@@ -5,12 +5,12 @@
            alt="Card image cap">
     </div>
     <div class="card-body">
-      <h4 class="card-title">@johadi</h4>
+      <h4 class="card-title">@{{userDetails.username}}</h4>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item list-group-item-dark">Jimoh Hadi</li>
-      <li class="list-group-item list-group-item-dark">jimo.had@zmail.com</li>
-      <li class="list-group-item list-group-item-dark">+2348154758967</li>
+      <li class="list-group-item list-group-item-dark">{{userDetails.fullname}}</li>
+      <li class="list-group-item list-group-item-dark">{{userDetails.email}}</li>
+      <li *ngIf="userDetails.mobile" class="list-group-item list-group-item-dark">{{userDetails.mobile}}</li>
     </ul>
     <div class="card-body">
       <a href="#" class="card-link btn btn-outline-white">Edit Profile</a>

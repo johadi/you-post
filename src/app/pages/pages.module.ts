@@ -15,6 +15,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { GroupMessagesComponent } from './group-messages/group-messages.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { PageRoutingModule } from './page-routing.module';
+import { IndexPageComponent } from './index-page/index-page.component';
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import { AddUserComponent } from './add-user/add-user.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
+    PageRoutingModule
   ],
   declarations: [
     HomeComponent,
@@ -35,7 +38,8 @@ import { AddUserComponent } from './add-user/add-user.component';
     NotFoundComponent,
     CreateGroupComponent,
     GroupMessagesComponent,
-    AddUserComponent
+    AddUserComponent,
+    IndexPageComponent,
   ]
 })
 export class PagesModule { }
