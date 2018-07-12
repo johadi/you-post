@@ -6,13 +6,22 @@
     "node": "9.4.0",
     "npm": "5.6.0"
   },
+  "nyc": {
+    "exclude": [
+      "server/tests/seed",
+      "client/tests"
+    ]
+  },
   "scripts": {
     "ng": "ng",
     "start:dev": "nodemon --watch server --exec babel-node -- app.js",
     "migrate": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo:all",
     "start": "node app.compile",
     "build": "ng build",
+    "build:watch": "ng build --watch",
     "heroku-postbuild": "ng build --aot -prod",
+    "test:server": "export NODE_ENV=test && sequelize db:migrate && mocha --compilers js:babel-register server/tests/**/*.test.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

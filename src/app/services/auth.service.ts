@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { toPromise } from 'rxjs/operator/toPromise';
 // import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -12,7 +14,7 @@ export class AuthService {
 
   private apiBaseUrl: string = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   signup(userDetails) {
     return this.http.post(`${this.apiBaseUrl}/v1/user/signup`, userDetails)
@@ -22,6 +24,16 @@ export class AuthService {
   signin(userCredentials) {
     return this.http.post(`${this.apiBaseUrl}/v1/user/signin`, userCredentials)
       .catch(this.handleError);
+  }
+
+  verifyUser() {
+    if (localStorage.token) {
+      return this.http.get(`${this.apiBaseUrl}/v1/verify-token`)
+        .toPromise()
+        .then((result => {
+          console.log(result);
+        }));
+    }
   }
 
   private handleError(error: HttpErrorResponse) {

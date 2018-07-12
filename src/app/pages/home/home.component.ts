@@ -9,9 +9,6 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  display = 'none';
-  show: boolean;
   signupForm: FormGroup;
   signupValidationError = {};
   signupErrorMessage: string;
@@ -38,6 +35,8 @@ export class HomeComponent implements OnInit {
       username: [''],
       password: ['']
     });
+
+    this.authService.verifyUser();
   }
 
   onSignup() {
@@ -95,5 +94,13 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('token', token);
     closeElement.nativeElement.click();
     this.router.navigate(['/dashboard']);
+  }
+
+  private verifyUser() {
+    this.authService.verifyUser()
+      .toPromise()
+      .then((result) => {
+        console.log('RES', result);
+      });
   }
 }
