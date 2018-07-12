@@ -2,8 +2,8 @@
   
 ## Application Features
 
-* [x] Sign up for the system
-* Login with your credentials
+- [X] Sign up for the system
+- [X] Login with your credentials
 * Create group
 * Search and add other registered users to groups you joined
 * Send notification to groups you joined
@@ -13,7 +13,7 @@
 * Read all notifications available in the groups you joined
 * View list of all groups you joined
 * View list of members in a particular group you joined
-* Logout of the application any time you wish
+- [X] Logout of the application any time you wish
 * Reset password if forgotten
 
 ## Technology Stack
