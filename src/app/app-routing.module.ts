@@ -14,13 +14,14 @@ import {GroupMessagesComponent} from './pages/group-messages/group-messages.comp
 import {AddUserComponent} from './pages/add-user/add-user.component';
 import { IndexPageComponent } from './pages/index-page/index-page.component';
 import { UserResolverService } from './resolvers/user-resolver.service';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component:  IndexPageComponent },
-  { path: 'gru', component:  AddUserComponent },
   {
     path: 'dashboard',
     component: HomeComponent,
+    canActivate: [AuthGuard],
     resolve: { userResolver: UserResolverService },
     children: [
       { path: '', component:  DashboardComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   {
     path: 'group',
     component:  GroupBoardComponent,
+    canActivate: [AuthGuard],
     resolve: { userResolver: UserResolverService },
     children: [
       { path: '', component: GroupMessagesComponent  },

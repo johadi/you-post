@@ -10,6 +10,7 @@ import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { GroupService } from './services/group.service';
 import { httpInterceptorProviders } from './interceptors';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { httpInterceptorProviders } from './interceptors';
     PagesModule,
     AppRoutingModule
   ],
-  providers: [UserService, AuthService, GroupService, httpInterceptorProviders],
+  providers: [UserService, AuthService, GroupService, httpInterceptorProviders, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
