@@ -1,6 +1,13 @@
 <h4>Sport group</h4>
 <hr>
 <ul class="list-unstyled">
+  <li *ngFor="let groupMessage of groupMessages" class="media">
+    <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">{{groupMessage.User.username}} <small class="text-muted">Posted {{groupMessage.updatedAt}}</small></h5>
+      {{groupMessage.body}}
+    </div>
+  </li>
   <li class="media">
     <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
     <div class="media-body">
