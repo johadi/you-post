@@ -9,31 +9,31 @@
         <div class="card-header">
           <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
-              <a class="btn btn-outline-display nav-link btn-sm text-display" routerLink="/group">
+              <a class="btn btn-outline-display nav-link btn-sm text-display" [routerLink]="'/group/'+groupId">
                 <i class="fa fa-envelope-open" aria-hidden="true"></i>
                 Messages
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-display" routerLink="/group/send-message">
+              <a class="nav-link text-display" [routerLink]="'/group/'+groupId+'/send-message'">
                 <i class="fa fa-commenting" aria-hidden="true"></i>
                 Post message
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-display" routerLink="/group/users">
+              <a class="nav-link text-display" [routerLink]="'/group/'+groupId+'/users'">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 Group members
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-display" routerLink="/group/add-user">
+              <a class="nav-link text-display" [routerLink]="'/group/'+groupId+'/add-user'">
                 <i class="fa fa-plus-square" aria-hidden="true"></i>
                 Add user
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-danger" href="#">
+              <a class="nav-link text-danger" routerLink="/dashboard">
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                 Exit group
               </a>

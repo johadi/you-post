@@ -9,9 +9,11 @@ import { ActivatedRoute } from '@angular/router';
 export class GroupBoardComponent implements OnInit {
 
   userDetails: any;
+  groupId: any;
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.groupId = this.route.snapshot.paramMap.get('id');
     this.route.data
       .subscribe(data => this.userDetails = data.userResolver);
   }
