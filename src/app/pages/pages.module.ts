@@ -17,6 +17,7 @@ import { GroupMessagesComponent } from './group-messages/group-messages.componen
 import { AddUserComponent } from './add-user/add-user.component';
 import { PageRoutingModule } from './page-routing.module';
 import { IndexPageComponent } from './index-page/index-page.component';
+import { SetAddUserButtonDirective } from '../directives/set-add-user-button.directive';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { IndexPageComponent } from './index-page/index-page.component';
     GroupMessagesComponent,
     AddUserComponent,
     IndexPageComponent,
+    SetAddUserButtonDirective,
   ]
 })
 export class PagesModule { }
