@@ -1,31 +1,12 @@
-<div class="row">
+<div *ngIf="groups" class="row">
   <div class="offset-1 col-lg-10">
     <div class="card p-3">
       <div class="card-body">
-        <h4>Wixing group</h4>
-        <p>20 members</p>
+        <h4>{{groups.name}} group</h4>
+        <p>{{groups.users.length}} {{groups.users.length == 1 ? 'member' : 'members'}}</p>
         <hr>
         <ul class="list-group">
-          <li class="list-group-item">Jimoh</li>
-          <li class="list-group-item">Johadi</li>
-          <li class="list-group-item">Morgaan</li>
-          <li class="list-group-item">Monica</li>
-          <li class="list-group-item">Ellen</li>
-          <li class="list-group-item">Jimoh</li>
-          <li class="list-group-item">Johadi</li>
-          <li class="list-group-item">Morgaan</li>
-          <li class="list-group-item">Monica</li>
-          <li class="list-group-item">Ellen</li>
-          <li class="list-group-item">Jimoh</li>
-          <li class="list-group-item">Johadi</li>
-          <li class="list-group-item">Morgaan</li>
-          <li class="list-group-item">Monica</li>
-          <li class="list-group-item">Ellen</li>
-          <li class="list-group-item">Jimoh</li>
-          <li class="list-group-item">Johadi</li>
-          <li class="list-group-item">Morgaan</li>
-          <li class="list-group-item">Monica</li>
-          <li class="list-group-item">Ellen</li>
+          <li *ngFor="let user of groups.users" class="list-group-item">{{user.User.username}}</li>
         </ul>
       </div>
     </div>

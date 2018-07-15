@@ -6,9 +6,11 @@
         <p>Total groups you joined: 20</p>
         <hr>
         <ul class="list-group">
+          <li *ngFor="let group of groups" class="list-group-item">
+            <a [routerLink]="'/group/'+group.Group.id">{{group.Group.name}}</a>
+          </li>
           <li class="list-group-item"><a routerLink="/group">Andela</a></li>
           <li class="list-group-item"><a routerLink="/group/send-message">Sport</a></li>
-          <li class="list-group-item">Soccer</li>
           <li class="list-group-item">Wrestling</li>
           <li class="list-group-item">Ellen</li>
           <li class="list-group-item">Jimoh</li>
