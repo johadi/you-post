@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { GroupService } from '../../services/group.service';
 
 @Component({
   selector: 'app-create-group',
@@ -8,15 +10,31 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 })
 export class CreateGroupComponent implements OnInit {
   form: FormGroup;
+  createGroupError: string;
 
-  constructor(fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private groupService: GroupService,
+    private router: Router
+  ) {
     this.form = fb.group({
-      name: 'hell'
+      name: ['']
     });
   }
   ngOnInit() {
   }
   handleSubmit() {
-    console.log(this.form);
+    this.groupService.createGroup(this.form.value)
+      .toPromise()
+      .then(response => {
+        this.router.navigate(['/group', response.id]);
+      })
+      .catch(error => {
+        const { message } = error;
+        this.createGroupError = typeof message === 'string' ? message : 'Error occurred. Try again!';
+      });
+  }
+  onAlertDismiss() {
+    this.createGroupError = '';
   }
 }
