@@ -30,7 +30,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'group',
+    path: 'group/:id',
     component:  GroupBoardComponent,
     canActivate: [AuthGuard],
     resolve: { userResolver: UserResolverService },
