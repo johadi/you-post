@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-import { Observable } from 'rxjs/Observable';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -13,10 +12,10 @@ export class UserResolverService implements Resolve<any> {
 
   resolve(routeSnapshot: ActivatedRouteSnapshot, stateSnapshot: RouterStateSnapshot) {
     return this.authService.verifyUser()
-      .catch((error) => {
+      .pipe(catchError((error) => {
         this.router.navigate(['/']);
-        return Observable.throw(error);
-      });
+        return throwError(error);
+      }));
   }
 
 }

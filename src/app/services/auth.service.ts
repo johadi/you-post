@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -15,17 +13,17 @@ export class AuthService {
 
   signup(userDetails) {
     return this.http.post(`${this.apiBaseUrl}/v1/user/signup`, userDetails)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   signin(userCredentials) {
     return this.http.post(`${this.apiBaseUrl}/v1/user/signin`, userCredentials)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   verifyUser() {
     return this.http.get(`${this.apiBaseUrl}/v1/verify-token`)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -44,7 +42,7 @@ export class AuthService {
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
-    return Observable.throw(errorBody);
+    return throwError(errorBody);
   }
 
   getAuthorizationToken() {

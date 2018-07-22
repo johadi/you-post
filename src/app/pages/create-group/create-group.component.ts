@@ -26,7 +26,7 @@ export class CreateGroupComponent implements OnInit {
   handleSubmit() {
     this.groupService.createGroup(this.form.value)
       .toPromise()
-      .then(response => {
+      .then((response: any) => {
         this.router.navigate(['/group', response.id]);
       })
       .catch(error => {

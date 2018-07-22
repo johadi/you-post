@@ -20,7 +20,7 @@ export class GroupMessagesComponent implements OnInit {
     const groupId = this.route.parent.snapshot.paramMap.get('id');
     this.groupService.getGroupMessages(groupId)
       .toPromise()
-      .then(response => {
+      .then((response: any) => {
         console.log('+++++++++', response.rows);
         this.groupMessages = response.rows;
       })

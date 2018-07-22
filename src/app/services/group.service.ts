@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { CreateGroupI, CreateMessageI, AddUserDetailsI } from '../interfaces';
 
@@ -15,38 +13,38 @@ export class GroupService {
 
   getUserGroups() {
     return this.http.get(`${this.apiBaseUrl}/v1/group/user/groups`)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   getGroupMessages(groupId) {
     return this.http.get(`${this.apiBaseUrl}/v1/group/${groupId}/message`)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   getGroupUsers(groupId) {
     return this.http.get(`${this.apiBaseUrl}/v1/group/${groupId}/group-users`)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   createGroup(groupName: CreateGroupI) {
     return this.http.post(`${this.apiBaseUrl}/v1/group`, groupName)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   createMessage(messageDetails: CreateMessageI, groupId: any) {
     return this.http.post(`${this.apiBaseUrl}/v1/group/${groupId}/message`, messageDetails)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   getUsersBySearch(searchTerm, groupId) {
     return this.http.get(`${this.apiBaseUrl}/v1/users?search=${searchTerm}&groupId=${groupId}`)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   addUserToGroup(userDetails: AddUserDetailsI, groupId: any) {
     console.log('USERDETAILS', userDetails);
     return this.http.post(`${this.apiBaseUrl}/v1/group/${groupId}/user`, userDetails)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -65,7 +63,7 @@ export class GroupService {
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
-    return Observable.throw(errorBody);
+    return throwError(errorBody);
   }
 
 }

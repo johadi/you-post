@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/throttleTime';
+import { debounceTime, distinctUntilChanged, throttleTime } from 'rxjs/operators';
 import { GroupService } from '../../services/group.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -29,8 +27,10 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.sub = this.searchForm.controls.search.valueChanges
-      .throttleTime(3000)
-      .distinctUntilChanged()
+      .pipe(
+        throttleTime(3000),
+        distinctUntilChanged()
+      )
       .subscribe(value => {
         this.groupService.getUsersBySearch(value, this.groupId)
           .toPromise()

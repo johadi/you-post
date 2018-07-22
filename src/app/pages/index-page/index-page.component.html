@@ -9,11 +9,11 @@
       <p>We understand <strong>Communication</strong> is a human connection that serves as key to personal and career success. <strong>
         <i>YouPost</i></strong> helps you achieve this</p>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signinModal">
+      <button type="button" class="btn btn-primary mr-1" data-toggle="modal" data-target="#signinModal">
         Login now
       </button>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#signupModal">
+      <button type="button" class="btn btn-danger ml-1" data-toggle="modal" data-target="#signupModal">
         Register now
       </button>
       <hr>
@@ -46,7 +46,7 @@
         <form [formGroup]="signupForm">
           <div *ngIf="signupErrorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
             {{signupErrorMessage}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button (click)="onDismissAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -102,7 +102,7 @@
         <form [formGroup]="signinForm">
           <div *ngIf="signinErrorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
             {{signinErrorMessage}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button (click)="onDismissAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

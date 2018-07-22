@@ -14,7 +14,7 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
     this.groupService.getUserGroups()
       .toPromise()
-      .then((response) => {
+      .then((response: any) => {
         this.groups = response.groups;
       });
   }

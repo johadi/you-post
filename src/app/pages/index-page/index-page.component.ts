@@ -69,7 +69,7 @@ export class IndexPageComponent implements OnInit {
   onSignin() {
     this.authService.signin(this.signinForm.value)
       .toPromise()
-      .then((result) => {
+      .then((result: string) => {
         localStorage.setItem('token', result);
         this.signinValidationError = {};
         this.signinErrorMessage = '';
@@ -96,6 +96,11 @@ export class IndexPageComponent implements OnInit {
     localStorage.setItem('token', token);
     closeElement.nativeElement.click();
     this.router.navigate(['/dashboard']);
+  }
+
+  onDismissAlert() {
+    this.signinErrorMessage = '';
+    this.signupErrorMessage = '';
   }
 
   private verifyUser() {
