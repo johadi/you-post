@@ -36,13 +36,12 @@ export class GroupService {
       .pipe(catchError(this.handleError));
   }
 
-  getUsersBySearch(searchTerm, groupId) {
+  getUsersBySearch(searchTerm = null, groupId) {
     return this.http.get(`${this.apiBaseUrl}/v1/users?search=${searchTerm}&groupId=${groupId}`)
       .pipe(catchError(this.handleError));
   }
 
   addUserToGroup(userDetails: AddUserDetailsI, groupId: any) {
-    console.log('USERDETAILS', userDetails);
     return this.http.post(`${this.apiBaseUrl}/v1/group/${groupId}/user`, userDetails)
       .pipe(catchError(this.handleError));
   }

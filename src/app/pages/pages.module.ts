@@ -18,10 +18,16 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { PageRoutingModule } from './page-routing.module';
 import { IndexPageComponent } from './index-page/index-page.component';
 import { SetAddUserButtonDirective } from '../directives/set-add-user-button.directive';
+import { StoreModule } from '@ngrx/store';
+import { groupFeatureReducers } from './state/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { GroupEffect } from './state/effects';
 
 @NgModule({
   imports: [
     CommonModule,
+    StoreModule.forFeature('group', groupFeatureReducers),
+    EffectsModule.forFeature([GroupEffect]),
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
