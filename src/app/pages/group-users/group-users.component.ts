@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GroupService } from '../../services/group.service';
+import { Store } from '@ngrx/store';
+import { GetGroupUsers } from '../state/actions';
+import { groupUsersSelector } from '../state/selectors';
+import { AppStateI } from '../state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-group-users',
@@ -9,8 +13,14 @@ import { GroupService } from '../../services/group.service';
 })
 export class GroupUsersComponent implements OnInit {
 
-  groups: any;
-  constructor(private route: ActivatedRoute, private groupService: GroupService) { }
+  groups$: Observable<any>;
+  constructor(private route: ActivatedRoute, private store: Store<AppStateI>) {
+   this.initComponent();
+  }
+
+  initComponent() {
+    this.groups$ = this.store.select(groupUsersSelector);
+  }
 
   ngOnInit() {
     this.getGroupUsers();
@@ -18,10 +28,7 @@ export class GroupUsersComponent implements OnInit {
 
   getGroupUsers() {
     const groupId = this.route.parent.snapshot.paramMap.get('id');
-    this.groupService.getGroupUsers(groupId)
-      .toPromise()
-      .then(response => this.groups = response)
-      .catch(error => console.log('err', error));
+    this.store.dispatch(new GetGroupUsers(groupId));
   }
 
 }

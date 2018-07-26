@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, throttleTime } from 'rxjs/operators';
-import { GroupService } from '../../services/group.service';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { GetUsersBySearch, ResetGetUserBySearchState, GroupActionTypes } from '../state/actions';
+import { searchUsersSelector, errorSelector } from '../state/selectors';
+import { AppStateI } from '../state';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-user',
@@ -12,10 +16,25 @@ import { ActivatedRoute } from '@angular/router';
 export class AddUserComponent implements OnInit, OnDestroy {
 
   searchForm: FormGroup;
-  sub: any;
+  searchingSub: Subscription;
+  errorSub: Subscription;
+  isSearching: boolean;
   groupId: any;
-  searchResult: object;
-  constructor(private groupService: GroupService, private route: ActivatedRoute) { }
+  searchResult$: Observable<object>;
+
+  constructor(private route: ActivatedRoute, private store: Store<AppStateI>) {
+    this.initComponent();
+  }
+
+  initComponent() {
+    this.searchResult$ = this.store.select(searchUsersSelector);
+    this.errorSub = this.store.select(errorSelector)
+      .subscribe((err) => {
+        if (err && err.type === GroupActionTypes.GET_USERS_BY_SEARCH) {
+          this.resetSearchState();
+        }
+      });
+  }
 
   ngOnInit() {
     this.searchForm = new FormGroup({
@@ -26,24 +45,28 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.sub = this.searchForm.controls.search.valueChanges
+    this.searchingSub = this.searchForm.controls.search.valueChanges
       .pipe(
-        throttleTime(3000),
+        debounceTime(1000),
         distinctUntilChanged()
       )
-      .subscribe(value => {
-        this.groupService.getUsersBySearch(value, this.groupId)
-          .toPromise()
-          .then(response => {
-            this.searchResult = response;
-            console.log('SSSS', this.searchResult);
-          })
-          .catch(error => console.log('ERRR', error));
+      .subscribe((value) => {
+        this.isSearching = true;
+        this.store.dispatch(new GetUsersBySearch({ searchTerm: value, groupId: this.groupId}));
       });
   }
 
+  resetSearchState() {
+    this.store.dispatch(new ResetGetUserBySearchState());
+  }
+
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.isSearching) {
+      this.resetSearchState();
+    }
+
+    this.errorSub.unsubscribe();
+    this.searchingSub.unsubscribe();
   }
 
 }

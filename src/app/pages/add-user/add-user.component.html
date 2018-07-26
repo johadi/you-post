@@ -19,7 +19,7 @@
             <th scope="col">Add</th>
           </tr>
           </thead>
-          <tbody *ngIf="searchResult">
+          <tbody *ngIf="searchResult$ | async as searchResult">
           <tr *ngFor="let user of searchResult.allUsers">
             <td>{{user.username}}</td>
             <td>{{user.fullname}}</td>

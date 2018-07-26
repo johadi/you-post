@@ -1,4 +1,4 @@
-<div *ngIf="groups" class="row">
+<div *ngIf="groups$ | async as groups" class="row">
   <div class="offset-1 col-lg-10">
     <div class="card p-3">
       <div class="card-body">

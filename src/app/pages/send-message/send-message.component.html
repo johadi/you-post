@@ -5,9 +5,9 @@
       <div class="card-body p-4">
         <div class="col-12 well well-lg" style="background-color: #FCFCFC">
           <form (ngSubmit)="onSumbit()" [formGroup]="messageForm">
-            <div *ngIf="createMessageError" (click)="onDismissAlert()" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div *ngIf="createMessageError$ | async as createMessageError" class="alert alert-danger alert-dismissible fade show" role="alert">
               {{createMessageError}}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <button (click)="onDismissAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>

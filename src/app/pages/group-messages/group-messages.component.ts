@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../services/group.service';
+import { Store, select } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import { GetGroupMessages } from '../state/actions';
+import { groupMessagesSelector } from '../state/selectors';
+import { AppStateI } from '../state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-group-messages',
@@ -9,8 +15,23 @@ import { GroupService } from '../../services/group.service';
 })
 export class GroupMessagesComponent implements OnInit {
 
-  groupMessages: any[];
-  constructor(private route: ActivatedRoute, private groupService: GroupService) { }
+  groupMessages$: Observable<any>;
+  constructor(
+    private route: ActivatedRoute, private groupService: GroupService, private store: Store<AppStateI>
+  ) {
+    this.initComponent();
+  }
+
+  initComponent() {
+    this.groupMessages$ = this.store.pipe(
+      select(groupMessagesSelector),
+      map((result: any) => {
+        if (result) {
+          return result.rows;
+        }
+      })
+    );
+  }
 
   ngOnInit() {
     this.getGroupMessages();
@@ -18,13 +39,7 @@ export class GroupMessagesComponent implements OnInit {
 
   getGroupMessages() {
     const groupId = this.route.parent.snapshot.paramMap.get('id');
-    this.groupService.getGroupMessages(groupId)
-      .toPromise()
-      .then((response: any) => {
-        console.log('+++++++++', response.rows);
-        this.groupMessages = response.rows;
-      })
-      .catch(err => console.log(err));
+    this.store.dispatch(new GetGroupMessages(groupId));
   }
 
 }
