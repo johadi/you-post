@@ -4,15 +4,15 @@
 
 - [X] Sign up for the system
 - [X] Login with your credentials
-* Create group
-* Search and add other registered users to groups you joined
-* Send notification to groups you joined
-* Read notifications sent by other users from your notification board
-* Receive Email notifications if urgent messages are sent to groups you joined
+- [X] Create group
+- [X] Search and add other registered users to groups you joined
+- [X] Send messages to groups you joined
+- [X] Read messages sent by other users from your message board
+- [X] Receive Email notifications if urgent messages are sent to groups you joined
 * Receive SMS and Email notifications if critical messages are sent to groups you joined
-* Read all notifications available in the groups you joined
-* View list of all groups you joined
-* View list of members in a particular group you joined
+* Read all messages available in the groups you joined
+- [X] View list of all groups you joined
+- [X] View list of members in a particular group you joined
 - [X] Logout of the application any time you wish
 * Reset password if forgotten
 
@@ -25,6 +25,7 @@
 - [PostgreSQL](https://www.postgresql.org/) A powerful, open source object-relational database system.
 #### Frontend
 - [Bootstrap](https://getbootstrap.com/) makes styling responsive web pages faster and easier.
+- [NgRx](https://github.com/ngrx) JavaScript Library for implementing Redux pattern in Angular applications. 
 - [Angular](https://angular.io) A JavaScript Framework for developing client side applications.
 
 ## Installation on development
