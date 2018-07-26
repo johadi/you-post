@@ -1,33 +1,14 @@
 <div class="p-3" style="height: 93vh; overflow-y: scroll;">
   <div class="col-10 offset-1 mt-3">
     <div class="card p-3">
-      <div class="card-body">
+      <div *ngIf="groups$ | async as allGroupsDetails" class="card-body">
         <h4>Your groups</h4>
-        <p>Total groups you joined: 20</p>
+        <p>Total groups you joined: <span>{{allGroupsDetails.groups.length}}</span></p>
         <hr>
         <ul class="list-group">
-          <li *ngFor="let group of groups" class="list-group-item">
+          <li *ngFor="let group of allGroupsDetails.groups" class="list-group-item">
             <a [routerLink]="'/group/'+group.Group.id">{{group.Group.name}}</a>
           </li>
-          <li class="list-group-item"><a routerLink="/group">Andela</a></li>
-          <li class="list-group-item"><a routerLink="/group/send-message">Sport</a></li>
-          <li class="list-group-item">Wrestling</li>
-          <li class="list-group-item">Ellen</li>
-          <li class="list-group-item">Jimoh</li>
-          <li class="list-group-item">Johadi</li>
-          <li class="list-group-item">Morgaan</li>
-          <li class="list-group-item">Monica</li>
-          <li class="list-group-item">Ellen</li>
-          <li class="list-group-item">Jimoh</li>
-          <li class="list-group-item">Johadi</li>
-          <li class="list-group-item">Morgaan</li>
-          <li class="list-group-item">Monica</li>
-          <li class="list-group-item">Ellen</li>
-          <li class="list-group-item">Jimoh</li>
-          <li class="list-group-item">Johadi</li>
-          <li class="list-group-item">Morgaan</li>
-          <li class="list-group-item">Monica</li>
-          <li class="list-group-item">Ellen</li>
         </ul>
       </div>
     </div>

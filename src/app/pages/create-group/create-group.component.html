@@ -3,8 +3,8 @@
     <div class="card pb-5 pt-1 pr-5 pl-5">
       <div class="card-body">
         <p class="text-display text-center">Create your group and start adding members</p>
-        <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-          <div *ngIf="createGroupError" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <form [formGroup]="createGroupForm" (ngSubmit)="handleSubmit()">
+          <div *ngIf="createGroupError$ | async as createGroupError" class="alert alert-danger alert-dismissible fade show" role="alert">
             {{createGroupError}}
             <button (click)="onAlertDismiss()" type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>

@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { GroupService } from '../../services/group.service';
+import { Store } from '@ngrx/store';
+import { map} from 'rxjs/operators';
+import { CreateGroup, GroupActionTypes, ClearError, ResetCreateGroupState } from '../state/actions';
+import { createGroupSelector, errorSelector } from '../state/selectors';
+import { AppStateI, ErrorI } from '../state';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-group',
@@ -9,32 +14,48 @@ import { GroupService } from '../../services/group.service';
   styleUrls: ['./create-group.component.scss']
 })
 export class CreateGroupComponent implements OnInit {
-  form: FormGroup;
-  createGroupError: string;
+  createGroupForm: FormGroup;
+  createGroupError$: Observable<string>;
+  createGroupSub: Subscription
 
   constructor(
-    private fb: FormBuilder,
-    private groupService: GroupService,
-    private router: Router
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private store: Store<AppStateI>
   ) {
-    this.form = fb.group({
+    this.initComponent();
+  }
+
+  initComponent() {
+    this.createGroupSub = this.store.select(createGroupSelector)
+      .subscribe((response: any) => {
+        if (response) {
+          this.router.navigate(['/group', response.id]);
+          this.store.dispatch(new ResetCreateGroupState());
+        }
+      });
+
+    this.createGroupError$ = this.store.select(errorSelector)
+      .pipe(
+        map((error: ErrorI) => {
+          if (error && error.type === GroupActionTypes.CREATE_GROUP) {
+            const {message} = error;
+            return typeof message === 'string' ? message : 'Error occurred. Try again!';
+          }
+        }));
+  }
+
+  ngOnInit() {
+    this.createGroupForm = this.formBuilder.group({
       name: ['']
     });
   }
-  ngOnInit() {
-  }
+
   handleSubmit() {
-    this.groupService.createGroup(this.form.value)
-      .toPromise()
-      .then((response: any) => {
-        this.router.navigate(['/group', response.id]);
-      })
-      .catch(error => {
-        const { message } = error;
-        this.createGroupError = typeof message === 'string' ? message : 'Error occurred. Try again!';
-      });
+    this.store.dispatch(new CreateGroup(this.createGroupForm.value));
   }
+
   onAlertDismiss() {
-    this.createGroupError = '';
+    this.store.dispatch(new ClearError());
   }
 }
