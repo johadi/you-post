@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { userDetailsSelector } from '../state/selectors';
+import { AppStateI } from '../state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-group-board',
@@ -8,14 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GroupBoardComponent implements OnInit {
 
-  userDetails: any;
+  userDetails$: Observable<any>;
   groupId: any;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private store: Store<AppStateI>) {
+    this.userDetails$ = store.select(userDetailsSelector);
+  }
 
   ngOnInit() {
     this.groupId = this.route.snapshot.paramMap.get('id');
-    this.route.data
-      .subscribe(data => this.userDetails = data.userResolver);
   }
 
 }

@@ -8,8 +8,18 @@ import { catchError } from 'rxjs/operators';
 export class AuthService {
 
   private apiBaseUrl: string = environment.apiBaseUrl;
+  private previousURL = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
+
+  get getPreviousURL() {
+    return this.previousURL;
+  }
+
+  set setPreviousURL(newURL) {
+    this.previousURL = newURL;
+  }
 
   signup(userDetails) {
     return this.http.post(`${this.apiBaseUrl}/v1/user/signup`, userDetails)
@@ -30,7 +40,7 @@ export class AuthService {
     const errorBody: any = {};
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      errorBody.message =  error.error.message;
+      errorBody.message = error.error.message;
       console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.

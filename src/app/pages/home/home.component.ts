@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { userDetailsSelector } from '../state/selectors';
+import { AppStateI } from '../state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-  userDetails: any;
-  constructor(private route: ActivatedRoute) {
-  }
-
-  ngOnInit() {
-    this.route.data
-      .subscribe(data => this.userDetails = data.userResolver);
+export class HomeComponent {
+  userDetails$: Observable<any>;
+  constructor(private store: Store<AppStateI>) {
+    this.userDetails$ = store.select(userDetailsSelector);
   }
 }

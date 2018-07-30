@@ -11,11 +11,12 @@ export class UserResolverService implements Resolve<any> {
   constructor(private authService: AuthService, private router: Router) { }
 
   resolve(routeSnapshot: ActivatedRouteSnapshot, stateSnapshot: RouterStateSnapshot) {
-    return this.authService.verifyUser()
-      .pipe(catchError((error) => {
-        this.router.navigate(['/']);
-        return throwError(error);
-      }));
+    // Example of resolver
+    // return this.authService.verifyUser()
+    //   .pipe(catchError((error) => {
+    //     this.router.navigate(['/']);
+    //     return throwError(error);
+    //   }));
   }
 
 }

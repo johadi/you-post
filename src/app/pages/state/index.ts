@@ -15,8 +15,17 @@ export interface GroupStateI {
   error: ErrorI;
 }
 
+export interface AuthStateI {
+  isLoading: boolean;
+  isAuthenticating: boolean;
+  signupSuccess: boolean;
+  signinSuccess: boolean;
+  userDetails: any;
+  error: any;
+}
 export interface GroupFeatureStateI {
   groupState: GroupStateI;
+  authState: AuthStateI;
 }
 
 export interface AppStateI {

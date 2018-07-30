@@ -2,7 +2,7 @@
 <div class="container-fluid n1">
   <div class="row">
     <div class="col-sm-3 pl-0">
-      <app-side-bar [userDetails]="userDetails"></app-side-bar>
+      <app-side-bar *ngIf="userDetails$ | async as userDetails" [userDetails]="userDetails"></app-side-bar>
     </div>
     <div class="col-sm-9 pl-0 pr-0" id="main">
       <div class="card text-center">

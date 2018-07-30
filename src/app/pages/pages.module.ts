@@ -21,13 +21,13 @@ import { SetAddUserButtonDirective } from '../directives/set-add-user-button.dir
 import { StoreModule } from '@ngrx/store';
 import { groupFeatureReducers } from './state/reducers';
 import { EffectsModule } from '@ngrx/effects';
-import { GroupEffect } from './state/effects';
+import { AuthEffect, GroupEffect } from './state/effects';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature('group', groupFeatureReducers),
-    EffectsModule.forFeature([GroupEffect]),
+    EffectsModule.forFeature([GroupEffect, AuthEffect]),
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
