@@ -1,86 +1,25 @@
 <div class="p-3" style="height: 93vh; overflow-y: scroll;">
   <h4>Message board</h4>
   <hr>
-  <ul class="list-unstyled">
-    <li class="media">
+  <ul class="list-unstyled mx-4" *ngIf="dashboardMessages$ | async as dashboardMessages">
+    <li class="message-wrapper media mb-3 pb-2" *ngFor="let message of dashboardMessages.messages">
       <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
       <div class="media-body">
-        <h5 class="mt-0 mb-1">Johadi <small class="text-muted">Posted 5mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
-      </div>
-    </li>
-    <li class="media my-4">
-      <img class="mr-3" src="../../../assets/images/cartoon.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">James <small class="text-muted">Posted 30mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
-      </div>
-    </li>
-    <li class="media my-4">
-      <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">David <small class="text-muted">Posted 5mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
-      </div>
-    </li>
-    <li class="media my-4">
-      <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">Ayishat<small class="text-muted"> Posted 10mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
-      </div>
-    </li>
-    <li class="media my-4">
-      <img class="mr-3" src="../../../assets/images/cartoon.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">Jimoh <small class="text-muted">Posted 5mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
-      </div>
-    </li>
-    <li class="media my-4">
-      <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">Johadi <small class="text-muted">Posted 5mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
-      </div>
-    </li>
-    <li class="media my-4">
-      <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">Hadi <small class="text-muted">Posted 5mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
-      </div>
-    </li>
-    <li class="media my-4">
-      <img class="mr-3" src="../../../assets/images/cartoon.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">Jimoh <small class="text-muted">Posted 5mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
-      </div>
-    </li>
-    <li class="media my-4">
-      <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">Sanni <small class="text-muted">Posted 5mins ago</small></h5>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio
-        , vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-        Donec lacinia congue felis in faucibus <a class="text-success" href="">more...</a>
+        <h5 class="mt-0 mb-1">
+          {{message.User.username}} <small class="message-date text-muted">Posted {{message.createdAt}}</small>
+        </h5>
+        <p class="mb-0"><a routerLink="/" class="text-body d-inline-block text-truncate">{{message.body}}</a></p>
+        <p class="m-0">
+          <small
+            [ngClass]="{
+            'text-success': message.priority=== 'normal',
+            'text-warning': message.priority=== 'urgent',
+            'text-danger': message.priority=== 'critical'}"
+            >{{message.priority}}</small>
+          <small class="text-display pull-right mr-3">
+            <a [routerLink]="['/group', message.Group.id]">{{message.Group.name}}</a>
+          </small>
+        </p>
       </div>
     </li>
   </ul>

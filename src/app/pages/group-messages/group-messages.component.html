@@ -1,11 +1,19 @@
 <h4>Sport group</h4>
 <hr>
-<ul class="list-unstyled">
-  <li *ngFor="let groupMessage of groupMessages$ | async" class="media">
+<ul class="list-unstyled  mx-4">
+  <li *ngFor="let groupMessage of groupMessages$ | async" class="message-wrapper media mb-3 pb-2">
     <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
     <div class="media-body">
-      <h5 class="mt-0 mb-1">{{groupMessage.User.username}} <small class="text-muted">Posted {{groupMessage.updatedAt}}</small></h5>
-      {{groupMessage.body}}
+      <h5 class="mt-0 mb-1">{{groupMessage.User.username}} <small class="message-date text-muted">Posted {{groupMessage.updatedAt}}</small></h5>
+      <p class="mb-0"><span class="text-body d-inline-block text-truncate">{{groupMessage.body}}</span></p>
+      <p class="m-0">
+        <small
+          [ngClass]="{
+            'text-success': groupMessage.priority=== 'normal',
+            'text-warning': groupMessage.priority=== 'urgent',
+            'text-danger': groupMessage.priority=== 'critical'}"
+        >{{groupMessage.priority}}</small>
+      </p>
     </div>
   </li>
 </ul>

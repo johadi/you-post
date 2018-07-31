@@ -34,3 +34,7 @@ export const createGroupSelector = createSelector(groupSelector, (groupFeatureSt
 export const getUserGroupsSelector = createSelector(groupSelector, (groupFeatureState: GroupFeatureStateI) => {
   return groupFeatureState.groupState.userGroups;
 });
+
+export const getDashboardMessagesSelector = createSelector(groupSelector, (groupFeatureState: GroupFeatureStateI) => {
+  return groupFeatureState.groupState.dashboardMessages;
+});

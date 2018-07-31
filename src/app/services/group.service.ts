@@ -41,6 +41,11 @@ export class GroupService {
       .pipe(catchError(this.handleError));
   }
 
+  getDashboardMessages() {
+    return this.http.get(`${this.apiBaseUrl}/v1/group/user/board`)
+      .pipe(catchError(this.handleError));
+  }
+
   addUserToGroup(userDetails: AddUserDetailsI, groupId: any) {
     return this.http.post(`${this.apiBaseUrl}/v1/group/${groupId}/user`, userDetails)
       .pipe(catchError(this.handleError));

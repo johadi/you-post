@@ -16,11 +16,13 @@ export enum GroupActionTypes {
   ADD_USER_TO_GROUP = '[group] add user to group',
   ADD_USER_TO_GROUP_SUCCESS = '[group] add user to group success',
   RESET_ADD_USER_TO_GROUP_STATE = '[group] reset user to group state',
-  CREATE_GROUP = '[group] create group',
-  CREATE_GROUP_SUCCESS = '[group] create group success',
-  RESET_CREATE_GROUP_STATE = '[group] reset create group state',
-  GET_USER_GROUPS = '[group] get user groups',
-  GET_USER_GROUPS_SUCCESS = '[group] get groups success',
+  CREATE_GROUP = '[user] create group',
+  CREATE_GROUP_SUCCESS = '[user] create group success',
+  RESET_CREATE_GROUP_STATE = '[user] reset create group state',
+  GET_USER_GROUPS = '[user] get user groups',
+  GET_USER_GROUPS_SUCCESS = '[user] get user groups success',
+  GET_DASHBOARD_MESSAGES = '[user] get messages of dashboard',
+  GET_DASHBOARD_MESSAGES_SUCCESS = '[user] get messages of dashboard success',
   ERROR = '[group] group related errors'
 }
 
@@ -133,6 +135,16 @@ export class GetUserGroupsSuccess implements Action {
   constructor(public payload: any) {
   }
 }
+export class GetDashboardMessages implements Action {
+  readonly type = GroupActionTypes.GET_DASHBOARD_MESSAGES;
+}
+
+export class GetDashboardMessagesSuccess implements Action {
+  readonly type = GroupActionTypes.GET_DASHBOARD_MESSAGES_SUCCESS;
+
+  constructor(public payload: any) {
+  }
+}
 
 export class GroupError implements Action {
   readonly type = GroupActionTypes.ERROR;
@@ -163,5 +175,7 @@ export type GroupActionUnions = GetGroupMessages
   | ResetCreateGroupState
   | GetUserGroups
   | GetUserGroupsSuccess
+  | GetDashboardMessages
+  | GetDashboardMessagesSuccess
   | GroupError
   | ClearError;

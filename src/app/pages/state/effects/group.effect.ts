@@ -15,14 +15,20 @@ import {
   GetUsersBySearchSuccess,
   AddUserToGroup,
   AddUserToGroupSuccess,
-  GroupError, CreateGroup, CreateGroupSuccess, GetUserGroups, GetUserGroupsSuccess
+  GroupError,
+  CreateGroup,
+  CreateGroupSuccess,
+  GetUserGroups,
+  GetUserGroupsSuccess,
+  GetDashboardMessages,
+  GetDashboardMessagesSuccess
 } from '../actions';
 import { GroupService } from '../../../services/group.service';
 
 @Injectable()
 export class GroupEffect {
   @Effect()
-  getGroupMesages$: Observable<Action> = this.actions$.ofType<GetGroupMessages>(GroupActionTypes.GET_MESSAGES)
+  getGroupMessages$: Observable<Action> = this.actions$.ofType<GetGroupMessages>(GroupActionTypes.GET_MESSAGES)
     .pipe(
       mergeMap((action) => this.groupService.getGroupMessages(action.payload)
         .pipe(
@@ -138,6 +144,22 @@ export class GroupEffect {
               return of(new GroupError(err));
             })
           )
+      )
+    );
+
+  @Effect()
+  getDashboardMessages$: Observable<Action> = this.actions$.ofType<GetDashboardMessages>(GroupActionTypes.GET_DASHBOARD_MESSAGES)
+    .pipe(
+      mergeMap(() => this.groupService.getDashboardMessages()
+        .pipe(
+          map((data) => {
+            return new GetDashboardMessagesSuccess(data);
+          }),
+          catchError((err) => {
+            err.type = GroupActionTypes.GET_DASHBOARD_MESSAGES;
+            return of(new GroupError(err));
+          })
+        )
       )
     );
 

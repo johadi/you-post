@@ -9,6 +9,7 @@ const initialState: GroupStateI = {
   searchedUserDetails: null,
   createGroupSuccess: null,
   userGroups: null,
+  dashboardMessages: null,
   error: null
 }
 
@@ -79,6 +80,12 @@ export const groupReducer = (state: GroupStateI = initialState, action: GroupAct
         ...state,
         error: null,
         userGroups: action.payload
+      };
+    case GroupActionTypes.GET_DASHBOARD_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        dashboardMessages: action.payload
       };
     case GroupActionTypes.ERROR:
       return {

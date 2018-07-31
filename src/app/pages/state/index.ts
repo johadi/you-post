@@ -12,6 +12,7 @@ export interface GroupStateI {
   searchedUserDetails: any;
   createGroupSuccess: any;
   userGroups: any;
+  dashboardMessages: any;
   error: ErrorI;
 }
 

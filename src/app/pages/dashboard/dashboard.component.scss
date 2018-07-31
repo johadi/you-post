@@ -42,3 +42,54 @@
   background-color: #ffffff;
   border-color: #ffffff;
 }
+
+.message-wrapper {
+  border-bottom: solid 1px rgba(0,0,0,.1);
+}
+
+.text-body {
+  max-width: 780px;
+  color: #2e3133;
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
+  .text-body {
+    max-width: 600px;
+  }
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+  .text-body {
+    max-width: 500px;
+  }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 780.98px) {
+  .text-body {
+    max-width: 410px;
+  }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+  .message-date {
+    font-size: 12px;
+  }
+  .text-body {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 380.98px) {
+  .message-date {
+    font-size: 12px;
+  }
+  .text-body {
+    font-size:  15px;
+    max-width: 200px;
+  }
+}
+
