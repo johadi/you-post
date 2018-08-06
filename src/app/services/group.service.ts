@@ -9,7 +9,8 @@ import { CreateGroupI, CreateMessageI, AddUserDetailsI } from '../interfaces';
 export class GroupService {
   private apiBaseUrl: string = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getUserGroups() {
     return this.http.get(`${this.apiBaseUrl}/v1/group/user/groups`)
@@ -51,11 +52,16 @@ export class GroupService {
       .pipe(catchError(this.handleError));
   }
 
+  getMessage(groupId: any, messageId: any) {
+    return this.http.get(`${this.apiBaseUrl}/v1/group/${groupId}/message/${messageId}`)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     const errorBody: any = {};
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      errorBody.message =  error.error.message;
+      errorBody.message = error.error.message;
       console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.

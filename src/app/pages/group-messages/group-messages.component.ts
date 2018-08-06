@@ -1,36 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { GroupService } from '../../services/group.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { map } from 'rxjs/operators';
-import { GetGroupMessages } from '../state/actions';
-import { groupMessagesSelector } from '../state/selectors';
+import {
+  GetGroupMessages,
+  GetMessage,
+  ResetViewingMessageState,
+  UpdateGroupBoardMessages,
+  UpdateViewingMessageState
+} from '../state/actions';
+import { getGroupStateSelector, userDetailsSelector } from '../state/selectors';
 import { AppStateI } from '../state';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-group-messages',
   templateUrl: './group-messages.component.html',
   styleUrls: ['./group-messages.component.scss']
 })
-export class GroupMessagesComponent implements OnInit {
+export class GroupMessagesComponent implements OnInit, OnDestroy {
 
-  groupMessages$: Observable<any>;
+  groupMessages: any;
+  groupName: string;
+  currentViewingMessage: any;
+  isLoading: boolean;
+  userDetails: any;
+  groupSub: Subscription;
+  userSub: Subscription;
+  defaultReadStatus = 'unread';
+
   constructor(
-    private route: ActivatedRoute, private groupService: GroupService, private store: Store<AppStateI>
+    private route: ActivatedRoute, private store: Store<AppStateI>
   ) {
     this.initComponent();
   }
 
   initComponent() {
-    this.groupMessages$ = this.store.pipe(
-      select(groupMessagesSelector),
-      map((result: any) => {
-        if (result) {
-          return result.rows;
-        }
-      })
-    );
+    this.groupSub = this.store.pipe(select(getGroupStateSelector))
+      .subscribe(({groupMessages, currentViewingMessage, isLoading}) => {
+        this.groupMessages = groupMessages;
+        this.currentViewingMessage = currentViewingMessage;
+        this.isLoading = isLoading;
+      });
+    this.userSub = this.store.select(userDetailsSelector)
+      .subscribe(userDetails => this.userDetails = userDetails);
   }
 
   ngOnInit() {
@@ -40,6 +52,30 @@ export class GroupMessagesComponent implements OnInit {
   getGroupMessages() {
     const groupId = this.route.parent.snapshot.paramMap.get('id');
     this.store.dispatch(new GetGroupMessages(groupId));
+  }
+
+  handleClick(message: any) {
+    const {id, Group, readersId} = message;
+    const readerIdIndex = readersId.findIndex(readerId => readerId === this.userDetails.id);
+
+    if (readerIdIndex === -1) {
+      const payload = {groupId: Group.id, messageId: id};
+      this.groupName = Group.name;
+      this.store.dispatch(new GetMessage(payload));
+      return;
+    }
+
+    this.store.dispatch(new UpdateViewingMessageState(message));
+  }
+
+  resetCurrentMessageState(messageId) {
+    this.store.dispatch(new ResetViewingMessageState());
+    this.store.dispatch(new UpdateGroupBoardMessages({messageId, userId: this.userDetails.id}));
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+    this.groupSub.unsubscribe();
   }
 
 }

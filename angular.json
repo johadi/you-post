@@ -106,8 +106,7 @@
       }
     },
     "you-post-e2e": {
-      "root": "",
-      "sourceRoot": "e2e",
+      "root": "e2e/",
       "projectType": "application",
       "architect": {
         "e2e": {

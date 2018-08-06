@@ -21,7 +21,7 @@ import {
   GetUserGroups,
   GetUserGroupsSuccess,
   GetDashboardMessages,
-  GetDashboardMessagesSuccess
+  GetDashboardMessagesSuccess, GetMessage, GetMessageSuccess
 } from '../actions';
 import { GroupService } from '../../../services/group.service';
 
@@ -49,15 +49,15 @@ export class GroupEffect {
       mergeMap((action) => this.groupService.createMessage(
         action.payload.messageDetail, action.payload.groupId
         )
-        .pipe(
-          map((data) => {
-            return new CreateMessageSuccess(data);
-          }),
-          catchError((err) => {
-            err.type = GroupActionTypes.CREATE_MESSAGE;
-            return of(new GroupError(err));
-          })
-        )
+          .pipe(
+            map((data) => {
+              return new CreateMessageSuccess(data);
+            }),
+            catchError((err) => {
+              err.type = GroupActionTypes.CREATE_MESSAGE;
+              return of(new GroupError(err));
+            })
+          )
       )
     );
 
@@ -162,7 +162,23 @@ export class GroupEffect {
         )
       )
     );
+  @Effect()
+  getMessage$: Observable<Action> = this.actions$.ofType<GetMessage>(GroupActionTypes.GET_MESSAGE)
+    .pipe(
+      mergeMap(({payload}) => this.groupService.getMessage(payload.groupId, payload.messageId)
+        .pipe(
+          map((data) => {
+            return new GetMessageSuccess(data);
+          }),
+          catchError((err) => {
+            err.type = GroupActionTypes.GET_MESSAGE;
+            return of(new GroupError(err));
+          })
+        )
+      )
+    );
 
-  constructor(private actions$: Actions, private groupService: GroupService) {}
+  constructor(private actions$: Actions, private groupService: GroupService) {
+  }
 
 }

@@ -22,6 +22,8 @@ import { StoreModule } from '@ngrx/store';
 import { groupFeatureReducers } from './state/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffect, GroupEffect } from './state/effects';
+import { ModalsModule } from '../modals/modals.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -31,8 +33,10 @@ import { AuthEffect, GroupEffect } from './state/effects';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    PipesModule,
     ComponentsModule,
-    PageRoutingModule
+    PageRoutingModule,
+    ModalsModule
   ],
   declarations: [
     HomeComponent,

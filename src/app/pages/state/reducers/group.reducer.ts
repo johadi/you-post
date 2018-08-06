@@ -10,8 +10,10 @@ const initialState: GroupStateI = {
   createGroupSuccess: null,
   userGroups: null,
   dashboardMessages: null,
+  currentViewingMessage: null,
+  isLoading: false,
   error: null
-}
+};
 
 export const groupReducer = (state: GroupStateI = initialState, action: GroupActionUnions): GroupStateI => {
   switch (action.type) {
@@ -87,17 +89,71 @@ export const groupReducer = (state: GroupStateI = initialState, action: GroupAct
         error: null,
         dashboardMessages: action.payload
       };
+    case GroupActionTypes.GET_MESSAGE:
+      return {
+        ...state,
+        error: null,
+        isLoading: true,
+        currentViewingMessage: null
+      };
+    case GroupActionTypes.GET_MESSAGE_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        currentViewingMessage: action.payload,
+        isLoading: false
+      };
+    case GroupActionTypes.RESET_VIEWING_MESSAGE:
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+        currentViewingMessage: null
+      };
+    case GroupActionTypes.UPDATE_VIEWING_MESSAGE:
+      return {
+        ...state,
+        error: null,
+        currentViewingMessage: action.payload,
+        isLoading: false
+      };
+    case GroupActionTypes.UPDATE_GROUPBOARD_MESSAGES:
+      const clonedGroupMessages = [...state.groupMessages.rows];
+      const { messageId, userId } = action.payload;
+      const readGroupMessageIndex = clonedGroupMessages.findIndex(message => message.id === messageId);
+      let updateStatus = false;
+      if (clonedGroupMessages[readGroupMessageIndex].readersId.indexOf(userId) === -1) {
+        clonedGroupMessages[readGroupMessageIndex].readersId.push(userId);
+        updateStatus = true;
+      }
+
+      return updateStatus ?
+        {
+          ...state, groupMessages: {...state.groupMessages, rows: clonedGroupMessages}
+        } :
+        state;
+    case GroupActionTypes.UPDATE_DASHBOARD_MESSAGES:
+      const clonedMessages = [...state.dashboardMessages.messages];
+      const readMessageIndex = clonedMessages.findIndex(message => message.id === action.payload);
+      clonedMessages.splice(readMessageIndex, 1);
+
+      return {
+        ...state,
+        dashboardMessages: {...state.dashboardMessages, messages: clonedMessages}
+      };
     case GroupActionTypes.ERROR:
       return {
         ...state,
+        isLoading: false,
         error: action.payload
       };
     case GroupActionTypes.CLEAR_ERROR:
       return {
         ...state,
+        isLoading: false,
         error: null
       };
     default:
       return state;
   }
-}
+};

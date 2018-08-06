@@ -23,6 +23,12 @@ export enum GroupActionTypes {
   GET_USER_GROUPS_SUCCESS = '[user] get user groups success',
   GET_DASHBOARD_MESSAGES = '[user] get messages of dashboard',
   GET_DASHBOARD_MESSAGES_SUCCESS = '[user] get messages of dashboard success',
+  GET_MESSAGE = '[group] get message for reading',
+  GET_MESSAGE_SUCCESS = '[group] get message for reading success',
+  RESET_VIEWING_MESSAGE = '[group] reset viewing message related states',
+  UPDATE_VIEWING_MESSAGE = '[group] update viewing message if user already read it',
+  UPDATE_GROUPBOARD_MESSAGES = '[group] update group board messages after user read one of it',
+  UPDATE_DASHBOARD_MESSAGES = '[group] update dashboard messages after one of is read',
   ERROR = '[group] group related errors'
 }
 
@@ -146,6 +152,44 @@ export class GetDashboardMessagesSuccess implements Action {
   }
 }
 
+export class GetMessage implements Action {
+  readonly type = GroupActionTypes.GET_MESSAGE;
+
+  constructor(public payload: {groupId, messageId}) {
+  }
+}
+
+export class GetMessageSuccess implements Action {
+  readonly type = GroupActionTypes.GET_MESSAGE_SUCCESS;
+
+  constructor(public payload: any) {
+  }
+}
+
+export class ResetViewingMessageState implements Action {
+  readonly type = GroupActionTypes.RESET_VIEWING_MESSAGE;
+}
+
+export class UpdateViewingMessageState implements Action {
+  readonly type = GroupActionTypes.UPDATE_VIEWING_MESSAGE;
+  constructor(public payload: any) {
+  }
+}
+
+export class UpdateGroupBoardMessages implements Action {
+  readonly type = GroupActionTypes.UPDATE_GROUPBOARD_MESSAGES;
+
+  constructor(public payload: any) {
+  }
+}
+
+export class UpdateDashboardMessages implements Action {
+  readonly type = GroupActionTypes.UPDATE_DASHBOARD_MESSAGES;
+
+  constructor(public payload: any) {
+  }
+}
+
 export class GroupError implements Action {
   readonly type = GroupActionTypes.ERROR;
 
@@ -177,5 +221,11 @@ export type GroupActionUnions = GetGroupMessages
   | GetUserGroupsSuccess
   | GetDashboardMessages
   | GetDashboardMessagesSuccess
+  | GetMessage
+  | GetMessageSuccess
+  | ResetViewingMessageState
+  | UpdateViewingMessageState
+  | UpdateGroupBoardMessages
+  | UpdateDashboardMessages
   | GroupError
   | ClearError;

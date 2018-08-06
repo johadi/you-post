@@ -1,19 +1,42 @@
 <h4>Sport group</h4>
 <hr>
-<ul class="list-unstyled  mx-4">
-  <li *ngFor="let groupMessage of groupMessages$ | async" class="message-wrapper media mb-3 pb-2">
+<ul class="list-unstyled  mx-4" *ngIf="groupMessages">
+  <li *ngFor="let groupMessage of groupMessages.rows" class="message-wrapper media mb-3 pb-2">
     <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
     <div class="media-body">
-      <h5 class="mt-0 mb-1">{{groupMessage.User.username}} <small class="message-date text-muted">Posted {{groupMessage.updatedAt}}</small></h5>
-      <p class="mb-0"><span class="text-body d-inline-block text-truncate">{{groupMessage.body}}</span></p>
-      <p class="m-0">
+      <h5 class="mt-0 mb-1">
+        {{groupMessage.User.username}} <small class="message-date text-muted">Posted {{groupMessage.updatedAt}}</small>
+      </h5>
+      <p class="mb-0">
+        <a
+          (click)="handleClick(groupMessage)"
+          data-dismiss="modal" data-toggle="modal" href="#viewMessageModal"
+          class="text-body d-inline-block text-truncate">
+          {{groupMessage.body}}
+        </a>
+      </p>
+      <p class="m-0" *ngIf="defaultReadStatus | readStatus : userDetails.id : groupMessage.readersId as read">
         <small
+          class="badge badge-pill"
           [ngClass]="{
-            'text-success': groupMessage.priority=== 'normal',
-            'text-warning': groupMessage.priority=== 'urgent',
-            'text-danger': groupMessage.priority=== 'critical'}"
+            'badge-success': groupMessage.priority=== 'normal',
+            'badge-warning': groupMessage.priority=== 'urgent',
+            'badge-danger': groupMessage.priority=== 'critical'}"
         >{{groupMessage.priority}}</small>
+        <small
+          [ngClass]="{'badge-secondary': read === 'read', 'badge-info': read === 'unread'}"
+          class="badge pull-right mr-3">
+          {{read}}
+        </small>
       </p>
     </div>
   </li>
 </ul>
+<!-- View Message Modal -->
+<app-view-message-modal
+  (resetMessage)="resetCurrentMessageState($event)"
+  [groupName]="groupName"
+  [message]="currentViewingMessage"
+  [isLoading]="isLoading">
+</app-view-message-modal>
+

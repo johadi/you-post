@@ -3,6 +3,10 @@ import { GroupFeatureStateI } from '../';
 
 export const groupSelector = createFeatureSelector<GroupFeatureStateI>('group');
 
+export const getGroupStateSelector = createSelector(groupSelector, (groupFeatureState: GroupFeatureStateI) => {
+  return groupFeatureState.groupState;
+});
+
 export const groupMessagesSelector = createSelector(groupSelector, (groupFeatureState: GroupFeatureStateI) => {
   return groupFeatureState.groupState.groupMessages;
 });

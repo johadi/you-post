@@ -5,7 +5,7 @@ export interface ErrorI {
 }
 
 export interface GroupStateI {
-  groupMessages: object;
+  groupMessages: any;
   createMessageSuccess: any;
   groupUsers: any;
   addUserToGroupSuccess: any;
@@ -13,6 +13,8 @@ export interface GroupStateI {
   createGroupSuccess: any;
   userGroups: any;
   dashboardMessages: any;
+  isLoading: boolean;
+  currentViewingMessage: any;
   error: ErrorI;
 }
 
