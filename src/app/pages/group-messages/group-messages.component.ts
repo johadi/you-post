@@ -27,7 +27,6 @@ export class GroupMessagesComponent implements OnInit, OnDestroy {
   groupSub: Subscription;
   userSub: Subscription;
   defaultReadStatus = 'unread';
-
   constructor(
     private route: ActivatedRoute, private store: Store<AppStateI>
   ) {
