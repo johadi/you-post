@@ -30,7 +30,7 @@ export class GroupEffect {
   @Effect()
   getGroupMessages$: Observable<Action> = this.actions$.ofType<GetGroupMessages>(GroupActionTypes.GET_MESSAGES)
     .pipe(
-      mergeMap((action) => this.groupService.getGroupMessages(action.payload)
+      mergeMap(({payload}) => this.groupService.getGroupMessages(payload.groupId, payload.pageNumber)
         .pipe(
           map((data) => {
             return new GetGroupMessagesSuccess(data);
@@ -150,7 +150,7 @@ export class GroupEffect {
   @Effect()
   getDashboardMessages$: Observable<Action> = this.actions$.ofType<GetDashboardMessages>(GroupActionTypes.GET_DASHBOARD_MESSAGES)
     .pipe(
-      mergeMap(() => this.groupService.getDashboardMessages()
+      mergeMap((action) => this.groupService.getDashboardMessages(action.payload)
         .pipe(
           map((data) => {
             return new GetDashboardMessagesSuccess(data);

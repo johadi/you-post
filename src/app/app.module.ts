@@ -14,7 +14,6 @@ import { GroupService } from './services/group.service';
 import { httpInterceptorProviders } from './interceptors';
 import { AuthGuard } from './guards/auth.guard';
 import { environment } from '../environments/environment';
-import { ModalsModule } from './modals/modals.module';
 
 @NgModule({
   declarations: [
@@ -31,8 +30,7 @@ import { ModalsModule } from './modals/modals.module';
     }),
     HttpClientModule,
     PagesModule,
-    AppRoutingModule,
-    ModalsModule
+    AppRoutingModule
   ],
   providers: [UserService, AuthService, GroupService, httpInterceptorProviders, AuthGuard],
   bootstrap: [AppComponent]

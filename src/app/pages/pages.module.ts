@@ -24,6 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffect, GroupEffect } from './state/effects';
 import { ModalsModule } from '../modals/modals.module';
 import { PipesModule } from '../pipes/pipes.module';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { PipesModule } from '../pipes/pipes.module';
     ReactiveFormsModule,
     RouterModule,
     PipesModule,
+    InfiniteScrollModule,
     ComponentsModule,
     PageRoutingModule,
     ModalsModule

@@ -17,8 +17,8 @@ export class GroupService {
       .pipe(catchError(this.handleError));
   }
 
-  getGroupMessages(groupId) {
-    return this.http.get(`${this.apiBaseUrl}/v1/group/${groupId}/message`)
+  getGroupMessages(groupId, pageNumber = 1) {
+    return this.http.get(`${this.apiBaseUrl}/v1/group/${groupId}/message?page=${pageNumber}`)
       .pipe(catchError(this.handleError));
   }
 
@@ -42,8 +42,8 @@ export class GroupService {
       .pipe(catchError(this.handleError));
   }
 
-  getDashboardMessages() {
-    return this.http.get(`${this.apiBaseUrl}/v1/group/user/board`)
+  getDashboardMessages(pageNumber = 1) {
+    return this.http.get(`${this.apiBaseUrl}/v1/group/user/board?page=${pageNumber}`)
       .pipe(catchError(this.handleError));
   }
 

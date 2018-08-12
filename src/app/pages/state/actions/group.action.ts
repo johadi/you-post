@@ -143,6 +143,8 @@ export class GetUserGroupsSuccess implements Action {
 }
 export class GetDashboardMessages implements Action {
   readonly type = GroupActionTypes.GET_DASHBOARD_MESSAGES;
+  constructor(public payload: any) {
+  }
 }
 
 export class GetDashboardMessagesSuccess implements Action {

@@ -28,7 +28,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(new GetDashboardMessages());
+    this.getDashboardMessages();
+  }
+
+  getDashboardMessages(pageNumber = 1) {
+    this.store.dispatch(new GetDashboardMessages(pageNumber));
   }
 
   handleClick(groupId, messageId, groupName) {
@@ -40,6 +44,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   resetCurrentMessageState(messageId) {
     this.store.dispatch(new UpdateDashboardMessages(messageId));
     this.store.dispatch(new ResetViewingMessageState());
+  }
+
+  onScrollDown() {
+    const { currentPage, totalPages } = this.dashboardMessages.metaData;
+    if (currentPage < totalPages) {
+      this.getDashboardMessages(currentPage + 1);
+    }
+  }
+
+  onScrollUp() {
+    this.getDashboardMessages();
   }
 
   ngOnDestroy() {

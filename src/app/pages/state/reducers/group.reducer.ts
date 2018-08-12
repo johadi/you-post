@@ -15,13 +15,14 @@ const initialState: GroupStateI = {
   error: null
 };
 
-export const groupReducer = (state: GroupStateI = initialState, action: GroupActionUnions): GroupStateI => {
+export function groupReducer (state: GroupStateI = initialState, action: GroupActionUnions): GroupStateI {
   switch (action.type) {
     case GroupActionTypes.GET_MESSAGES_SUCCESS:
+      const previousMessages = state.groupMessages && action.payload.metaData.currentPage > 1 ? state.groupMessages.rows : [];
       return {
         ...state,
         error: null,
-        groupMessages: action.payload
+        groupMessages: { ...action.payload, rows: [...previousMessages, ...action.payload.rows] }
       };
     case GroupActionTypes.CREATE_MESSAGE_SUCCESS:
       return {
@@ -84,10 +85,12 @@ export const groupReducer = (state: GroupStateI = initialState, action: GroupAct
         userGroups: action.payload
       };
     case GroupActionTypes.GET_DASHBOARD_MESSAGES_SUCCESS:
+      const previousDashboardMessages = state.dashboardMessages && action.payload.metaData.currentPage > 1 ?
+        state.dashboardMessages.messages : [];
       return {
         ...state,
         error: null,
-        dashboardMessages: action.payload
+        dashboardMessages: { ...action.payload, messages: [...previousDashboardMessages, ...action.payload.messages] }
       };
     case GroupActionTypes.GET_MESSAGE:
       return {

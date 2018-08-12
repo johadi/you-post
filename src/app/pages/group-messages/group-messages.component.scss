@@ -51,3 +51,7 @@
     max-width: 200px;
   }
 }
+
+.messages-wrapper {
+  height: 80vh; overflow-y: scroll;
+}

@@ -27,6 +27,8 @@ export class GroupMessagesComponent implements OnInit, OnDestroy {
   groupSub: Subscription;
   userSub: Subscription;
   defaultReadStatus = 'unread';
+  groupId: any;
+
   constructor(
     private route: ActivatedRoute, private store: Store<AppStateI>
   ) {
@@ -45,12 +47,12 @@ export class GroupMessagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.groupId = this.route.parent.snapshot.paramMap.get('id');
     this.getGroupMessages();
   }
 
-  getGroupMessages() {
-    const groupId = this.route.parent.snapshot.paramMap.get('id');
-    this.store.dispatch(new GetGroupMessages(groupId));
+  getGroupMessages(pageNumber = 1) {
+    this.store.dispatch(new GetGroupMessages({groupId: this.groupId, pageNumber}));
   }
 
   handleClick(message: any) {
@@ -70,6 +72,17 @@ export class GroupMessagesComponent implements OnInit, OnDestroy {
   resetCurrentMessageState(messageId) {
     this.store.dispatch(new ResetViewingMessageState());
     this.store.dispatch(new UpdateGroupBoardMessages({messageId, userId: this.userDetails.id}));
+  }
+
+  onScrollDown() {
+    const {currentPage, totalPages} = this.groupMessages.metaData;
+    if (currentPage < totalPages) {
+      this.getGroupMessages(currentPage + 1);
+    }
+  }
+
+  onScrollUp() {
+    this.getGroupMessages();
   }
 
   ngOnDestroy() {

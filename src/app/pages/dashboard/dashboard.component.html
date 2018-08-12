@@ -1,36 +1,47 @@
-<div class="p-3" style="height: 93vh; overflow-y: scroll;">
+<div class="p-3" style="height: 93vh;">
   <h4>Message board</h4>
   <hr>
-  <ul class="list-unstyled mx-4" *ngIf="dashboardMessages">
-    <li class="message-wrapper media mb-3 pb-2" *ngFor="let message of dashboardMessages.messages">
-      <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">
-          {{message.User.username}} <small class="message-date text-muted">Posted {{message.createdAt}}</small>
-        </h5>
-        <p class="mb-0">
-          <a
-            (click)="handleClick(message.Group.id, message.id, message.Group.name)"
-            data-dismiss="modal" data-toggle="modal" href="#viewMessageModal"
-            class="text-body d-inline-block text-truncate">
-            {{message.body}}
-          </a>
-        </p>
-        <p class="m-0">
-          <small
-            class="badge badge-pill"
-            [ngClass]="{
+  <div
+    class="dashboard-messages-wrapper"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollUpDistance]="1.5"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScrollDown()"
+    (scrolledUp)="onScrollUp()"
+    [scrollWindow]="false"
+  >
+    <ul class="list-unstyled mx-4" *ngIf="dashboardMessages">
+      <li class="message-wrapper media mb-3 pb-2" *ngFor="let message of dashboardMessages.messages">
+        <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
+        <div class="media-body">
+          <h5 class="mt-0 mb-1">
+            {{message.User.username}} <small class="message-date text-muted">Posted {{message.createdAt}}</small>
+          </h5>
+          <p class="mb-0">
+            <a
+              (click)="handleClick(message.Group.id, message.id, message.Group.name)"
+              data-dismiss="modal" data-toggle="modal" href="#viewMessageModal"
+              class="text-body d-inline-block text-truncate">
+              {{message.body}}
+            </a>
+          </p>
+          <p class="m-0">
+            <small
+              class="badge badge-pill"
+              [ngClass]="{
             'badge-success': message.priority=== 'normal',
             'badge-warning': message.priority=== 'urgent',
             'badge-danger': message.priority=== 'critical'}"
             >{{message.priority}}</small>
-          <small class="text-display pull-right mr-3">
-            <a [routerLink]="['/group', message.Group.id]">{{message.Group.name}}</a>
-          </small>
-        </p>
-      </div>
-    </li>
-  </ul>
+            <small class="text-display pull-right mr-3">
+              <a [routerLink]="['/group', message.Group.id]">{{message.Group.name}}</a>
+            </small>
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
   <!-- View Message Modal -->
   <app-view-message-modal
     (resetMessage)="resetCurrentMessageState($event)"

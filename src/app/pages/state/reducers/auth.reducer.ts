@@ -10,7 +10,7 @@ const initialState: AuthStateI = {
   error: null
 };
 
-export const authReducer = (state: AuthStateI = initialState, action: AuthActionUnions): AuthStateI => {
+export function authReducer (state: AuthStateI = initialState, action: AuthActionUnions): AuthStateI {
   switch (action.type) {
     case AuthActionTypes.SIGN_UP_SUCCESS:
       return {
