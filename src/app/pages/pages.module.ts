@@ -21,7 +21,7 @@ import { SetAddUserButtonDirective } from '../directives/set-add-user-button.dir
 import { StoreModule } from '@ngrx/store';
 import { groupFeatureReducers } from './state/reducers';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffect, GroupEffect } from './state/effects';
+import { AuthEffect, GroupEffect, UserEffect } from './state/effects';
 import { ModalsModule } from '../modals/modals.module';
 import { PipesModule } from '../pipes/pipes.module';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
@@ -30,7 +30,7 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
   imports: [
     CommonModule,
     StoreModule.forFeature('group', groupFeatureReducers),
-    EffectsModule.forFeature([GroupEffect, AuthEffect]),
+    EffectsModule.forFeature([GroupEffect, AuthEffect, UserEffect]),
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

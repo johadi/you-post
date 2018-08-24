@@ -22,6 +22,7 @@ app.use(morganLogger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(compression());
+app.use('/uploads', express.static(path.join(__dirname, 'server/uploads')));
 app.use(express.static(path.join(__dirname, 'dist')));
 // app.use(favicon(path.join(__dirname, 'favicon2.ico')));
 apiRoutes(app);

@@ -18,6 +18,12 @@ export interface GroupStateI {
   error: ErrorI;
 }
 
+export interface UserStateI {
+  isLoading: boolean;
+  userIsUpdated: boolean;
+  error: any;
+}
+
 export interface AuthStateI {
   isLoading: boolean;
   isAuthenticating: boolean;
@@ -29,6 +35,7 @@ export interface AuthStateI {
 export interface GroupFeatureStateI {
   groupState: GroupStateI;
   authState: AuthStateI;
+  userState: UserStateI;
 }
 
 export interface AppStateI {

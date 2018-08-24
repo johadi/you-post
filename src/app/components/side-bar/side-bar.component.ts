@@ -5,6 +5,7 @@ interface UserDetailsI {
   fullname: string;
   email: string;
   mobile?: string;
+  avatarPath?: string;
 }
 
 @Component({

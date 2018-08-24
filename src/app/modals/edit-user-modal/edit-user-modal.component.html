@@ -1,0 +1,64 @@
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Profile</h5>
+        <button #editUserClose type="button" (click)="onDismissAlert()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editUserForm">
+          <div *ngIf="updateUserErrorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{updateUserErrorMessage}}
+            <button (click)="onDismissAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-4 offset-sm-4 col-6 offset-3 text-center">
+                <img
+                  class="img-thumbnail"
+                  [src]="userDetails.avatarPath ? userDetails.avatarPath : '../../../assets/images/default.png'"
+                  width="200" height="200"
+                  alt="Card image cap" #userAvatar>
+                <input style="display: none" (change)="onAvatarChange($event)" type="file" class="form-control" name="avatar" #avatarInput>
+                <button (click)="avatarInput.click()" class="btn btn-sm btn-dark btn-block mt-1">Change Picture</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input formControlName="username" type="text" class="form-control" name="username" placeholder="Username">
+            <small
+              *ngIf="updateFieldsErrors && updateFieldsErrors['username']"
+              class="form-text text-danger">{{updateFieldsErrors['username']}}
+            </small>
+          </div>
+          <div class="form-group">
+            <input formControlName="fullname" type="text" class="form-control" name="fullname" placeholder="Full Name">
+            <small
+              *ngIf="updateFieldsErrors && updateFieldsErrors['fullname']"
+              class="form-text text-danger">{{updateFieldsErrors['fullname']}}
+            </small>
+          </div>
+          <div class="form-group">
+            <input formControlName="email" type="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <input formControlName="mobile" type="text" class="form-control" name="mobile" placeholder="Mobile No">
+            <small
+              *ngIf="updateFieldsErrors && updateFieldsErrors['mobile']"
+              class="form-text text-danger">{{updateFieldsErrors['mobile']}}
+            </small>
+          </div>
+          <button (click)="onUpdate()" type="submit" class="btn btn-primary btn-display">Update</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #editUserCloseBottom (click)="onDismissAlert()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

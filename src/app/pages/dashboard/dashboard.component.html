@@ -12,6 +12,11 @@
     [scrollWindow]="false"
   >
     <ul class="list-unstyled mx-4" *ngIf="dashboardMessages">
+      <li *ngIf="dashboardMessages.messages.length === 0" class="text-center">
+        You currently have no any unread message!
+        <p><i class="fa fa-thumbs-o-up fa-3x"></i></p>
+        Only messages you haven't read in any group are shown here.
+      </li>
       <li class="message-wrapper media mb-3 pb-2" *ngFor="let message of dashboardMessages.messages">
         <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
         <div class="media-body">
