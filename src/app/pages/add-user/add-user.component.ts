@@ -7,6 +7,7 @@ import { GetUsersBySearch, ResetGetUserBySearchState, GroupActionTypes } from '.
 import { searchUsersSelector, errorSelector } from '../state/selectors';
 import { AppStateI } from '../state';
 import { Observable, Subscription } from 'rxjs';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-add-user',
@@ -22,7 +23,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   groupId: any;
   searchResult$: Observable<object>;
 
-  constructor(private route: ActivatedRoute, private store: Store<AppStateI>) {
+  constructor(private route: ActivatedRoute, private store: Store<AppStateI>, public userService: UserService) {
     this.initComponent();
   }
 

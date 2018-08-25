@@ -199,7 +199,7 @@ export default {
             limit,
             order: [['createdAt', 'DESC']],
             include: [
-              { model: models.User, attributes: ['id', 'username', 'fullname'] },
+              { model: models.User, attributes: ['id', 'username', 'fullname', 'avatarPath'] },
               { model: models.Group, attributes: ['id', 'name'] }
             ]
           })

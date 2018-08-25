@@ -4,6 +4,7 @@ import { GetDashboardMessages, GetMessage, ResetViewingMessageState, UpdateDashb
 import { getGroupStateSelector } from '../state/selectors';
 import { AppStateI } from '../state';
 import { Subscription } from 'rxjs';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   groupName: string;
   groupSub: Subscription;
 
-  constructor(private store: Store<AppStateI>) {
+  constructor(public userService: UserService, private store: Store<AppStateI>) {
    this.groupSub = this.store.select(getGroupStateSelector)
       .subscribe(({ dashboardMessages, currentViewingMessage, isLoading }) => {
         this.dashboardMessages = dashboardMessages;

@@ -18,10 +18,16 @@
         Only messages you haven't read in any group are shown here.
       </li>
       <li class="message-wrapper media mb-3 pb-2" *ngFor="let message of dashboardMessages.messages">
-        <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
+        <img
+          class="mr-3 img-thumbnail rounded-circle"
+          [src]="message.User.avatarPath ? message.User.avatarPath : userService.getDefaultAvatarPath"
+          width="64"
+          height="64"
+          alt="Generic placeholder image">
         <div class="media-body">
           <h5 class="mt-0 mb-1">
-            {{message.User.username}} <small class="message-date text-muted">Posted {{message.createdAt}}</small>
+            {{message.User.username}}
+            <small class="message-date text-muted">Sent {{message.createdAt | date : 'medium'}}</small>
           </h5>
           <p class="mb-0">
             <a

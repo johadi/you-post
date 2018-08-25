@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import {AppStateI} from '../../pages/state';
 import {authStateSelector, userErrorSelector} from '../../pages/state/selectors';
 import {AuthActionTypes, ClearAuthError, ClearUserError, UpdateUser, UserActionTypes} from '../../pages/state/actions';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-edit-user-modal',
@@ -19,7 +20,7 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
   updateFieldsErrors: {};
   @ViewChild('userAvatar') userAvatar: ElementRef;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<AppStateI>) {
+  constructor(private formBuilder: FormBuilder, private store: Store<AppStateI>, public userService: UserService) {
     this.store.select(authStateSelector)
       .subscribe(authState => {
         this.userDetails = authState.userDetails;
@@ -81,10 +82,11 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
   }
 
   onDismissAlert() {
-    const { username, fullname, mobile, email } = this.userDetails;
+    const { username, fullname, mobile, email, avatarPath } = this.userDetails;
     this.updateUserErrorMessage = '';
     this.updateFieldsErrors = {};
     this.store.dispatch(new ClearUserError());
+    this.userAvatar.nativeElement.src = avatarPath ? avatarPath : this.userService.getDefaultAvatarPath;
     this.editUserForm.reset({username, fullname, email, mobile, avatar: ''});
   }
 

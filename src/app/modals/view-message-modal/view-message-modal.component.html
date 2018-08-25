@@ -13,12 +13,20 @@
         <div *ngIf="!isLoading && message" class="row">
           <div class="col-12">
             <p class="m-0">
-              <span>{{message.priority}} - </span>
-              <small
-                class="text-muted"
-                [ngClass]="{}"
+              <span>Priority: </span>
+              <span
+                class="badge badge-pill"
+                [ngClass]="{
+            'badge-success': message.priority=== 'normal',
+            'badge-warning': message.priority=== 'urgent',
+            'badge-danger': message.priority=== 'critical'}"
               >
-                Posted on {{message.createdAt}}
+                {{message.priority}}
+              </span>
+              <small
+                class="text-muted pull-right"
+              >
+                Posted on {{message.createdAt | date : 'medium'}}
               </small>
               <small class="text-display pull-right mr-3">
                 {{groupName}}

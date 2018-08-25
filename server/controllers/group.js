@@ -245,7 +245,7 @@ export default {
             limit,
             include: [{
               model: models.User,
-              attributes: ['id', 'username', 'fullname']
+              attributes: ['id', 'username', 'fullname', 'avatarPath']
             }]
           })
             .then((groupWithMembers) => {

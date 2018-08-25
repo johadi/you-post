@@ -7,9 +7,14 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class UserService {
 
-  private apiBaseUrl: string = environment.apiBaseUrl;
+  private apiBaseUrl = environment.apiBaseUrl;
+  private defaultAvatarPath = 'assets/images/default.png';
 
   constructor(private http: HttpClient) {
+  }
+
+  get getDefaultAvatarPath() {
+    return this.defaultAvatarPath;
   }
 
   updateUser(updateDetails) {

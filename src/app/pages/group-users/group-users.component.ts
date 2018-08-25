@@ -5,6 +5,7 @@ import { GetGroupUsers } from '../state/actions';
 import { groupUsersSelector } from '../state/selectors';
 import { AppStateI } from '../state';
 import { Observable } from 'rxjs';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-group-users',
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs';
 export class GroupUsersComponent implements OnInit {
 
   groups$: Observable<any>;
-  constructor(private route: ActivatedRoute, private store: Store<AppStateI>) {
+  constructor(private route: ActivatedRoute, private store: Store<AppStateI>, public userService: UserService) {
    this.initComponent();
   }
 

@@ -1,4 +1,6 @@
-**YouPost** is an Application where registered users send notifications to one another via groups they belong to. It involves In-App, Email and SMS notification methods. Everything about this application is detailed below:
+**YouPost** is an Application where registered users send messages to one another via groups they joined. It involves In-App, Email and SMS messaging methods. 
+You can view the live application at [https://you-post.herokuapp.com](https://you-post.herokuapp.com). 
+Check below for the application details:
   
 ## Application Features
 
@@ -9,8 +11,8 @@
 - [X] Send messages to groups you joined
 - [X] Read messages sent by other users from your message board
 - [X] Receive Email notifications if urgent messages are sent to groups you joined
-* Receive SMS and Email notifications if critical messages are sent to groups you joined
-* Read all messages available in the groups you joined
+- [X] Receive SMS and Email notifications if critical messages are sent to groups you joined
+- [X] Read all messages available in the groups you joined
 - [X] View list of all groups you joined
 - [X] View list of members in a particular group you joined
 - [X] Logout of the application any time you wish

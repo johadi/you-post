@@ -11,6 +11,7 @@ import {
 import { getGroupStateSelector, userDetailsSelector } from '../state/selectors';
 import { AppStateI } from '../state';
 import { Subscription } from 'rxjs';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-group-messages',
@@ -30,7 +31,7 @@ export class GroupMessagesComponent implements OnInit, OnDestroy {
   groupId: any;
 
   constructor(
-    private route: ActivatedRoute, private store: Store<AppStateI>
+    private route: ActivatedRoute, private store: Store<AppStateI>, public userService: UserService
   ) {
     this.initComponent();
   }

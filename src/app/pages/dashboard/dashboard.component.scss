@@ -52,6 +52,10 @@
   color: #172690;
 }
 
+.message-date {
+  font-size: 11px;
+}
+
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1199.98px) {
   .text-body {
@@ -85,7 +89,7 @@
 
 @media (max-width: 380.98px) {
   .message-date {
-    font-size: 12px;
+    font-size: 9px;
   }
   .text-body {
     font-size:  15px;

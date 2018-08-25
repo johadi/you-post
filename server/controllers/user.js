@@ -101,10 +101,10 @@ export default {
             offset,
             limit,
             order: [['createdAt', 'DESC']],
-            include: [{model: models.User, attributes: ['username', 'fullname']}, {
-              model: models.Group,
-              attributes: ['id', 'name']
-            }]
+            include: [
+              {model: models.User, attributes: ['id', 'username', 'fullname', 'avatarPath']},
+              {model: models.Group, attributes: ['id', 'name']}
+            ]
           })
             .then((messages) => {
               // Get list of messages that have not been
@@ -148,7 +148,7 @@ export default {
             },
             offset,
             limit,
-            attributes: ['id', 'username', 'fullname', 'email'],
+            attributes: ['id', 'username', 'fullname', 'email', 'avatarPath'],
           })
           .then((users) => { // users = foundUsers
             // If a client wants to work with all
@@ -240,7 +240,7 @@ export default {
         const ext = files.avatar.name.split('.').pop().toLowerCase();
         if (ext !== 'jpg' && ext !== 'jpeg' && ext !== 'png') {
           fs.unlink(files.avatar.path);
-          return res.json('File must be in the format of either jpeg/jpg/png');
+          return handleError({ code: 400, message: 'File must be in the format of either jpeg/jpg/png'}, res);
         }
 
         if (process.env.NODE_ENV === 'production') {

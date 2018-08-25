@@ -15,10 +15,18 @@
       Consider writing one
     </li>
     <li *ngFor="let groupMessage of groupMessages.rows" class="message-wrapper media mb-3 pb-2">
-      <img class="mr-3" src="../../../assets/images/desmond.jpg" width="64" height="64" alt="Generic placeholder image">
+      <img
+        class="mr-3 img-thumbnail rounded-circle"
+        [src]="groupMessage.User.avatarPath ? groupMessage.User.avatarPath : userService.getDefaultAvatarPath"
+        width="64"
+        height="64"
+        alt="Generic placeholder image">
       <div class="media-body">
         <h5 class="mt-0 mb-1">
-          {{groupMessage.User.username}} <small class="message-date text-muted">Posted {{groupMessage.updatedAt}}</small>
+          <span class="text-capitalize">
+            {{groupMessage.User.username === userDetails.username ? 'you' : groupMessage.User.username}}
+          </span>
+          <small class="message-date text-muted">Sent {{groupMessage.updatedAt | date: 'medium'}}</small>
         </h5>
         <p class="mb-0">
           <a

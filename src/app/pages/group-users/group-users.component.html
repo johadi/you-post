@@ -6,7 +6,16 @@
         <p>{{groups.users.length}} {{groups.users.length == 1 ? 'member' : 'members'}}</p>
         <hr>
         <ul class="list-group">
-          <li *ngFor="let user of groups.users" class="list-group-item">{{user.User.username}}</li>
+          <li *ngFor="let user of groups.users" class="list-group-item py-2">
+            <span>{{user.User.username}}</span>
+            <img
+              class="pull-right img-thumbnail rounded-circle"
+              [src]="user.User.avatarPath ? user.User.avatarPath : userService.getDefaultAvatarPath"
+              width="40"
+              height="40"
+              alt="Generic placeholder image"
+            >
+          </li>
         </ul>
       </div>
     </div>
