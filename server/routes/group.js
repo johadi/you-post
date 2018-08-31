@@ -163,4 +163,42 @@ router.route('/v1/group/:groupId/group-users')
  *               type: object
  */
   .get(authenticate, groupController.getGroupUsers);
+  router.route('/v1/group/:groupId')
+  /**
+   * @swagger
+   * /api/v1/group/{groupId}:
+   *   get:
+   *     tags:
+   *       - Group
+   *     description: Get a group details
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: groupId
+   *         description: Group ID parameter
+   *         in: path
+   *         required: true
+   *         type: integer
+   *       - name: x-auth
+   *         in: header
+   *         description: authentication token
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Array of group members
+   *         schema:
+   *           properties:
+   *             id:
+   *               type: integer
+   *             name:
+   *               type: string
+   *             creatorId:
+   *               type: integer
+   *             createdAt:
+   *               type: string
+   *             updatedAt:
+   *               type: string
+   */
+    .get(authenticate, groupController.getGroupDetails);
 export default router;

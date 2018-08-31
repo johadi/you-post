@@ -57,6 +57,11 @@ export class GroupService {
       .pipe(catchError(this.handleError));
   }
 
+  getGroupDetails(groupId: any) {
+      return this.http.get(`${this.apiBaseUrl}/v1/group/${groupId}`)
+        .pipe(catchError(this.handleError));
+    }
+
   private handleError(error: HttpErrorResponse) {
     const errorBody: any = {};
     if (error.error instanceof ErrorEvent) {

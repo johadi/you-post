@@ -1,9 +1,8 @@
 <div *ngIf="groups$ | async as groups" class="row">
   <div class="offset-1 col-lg-10">
-    <div class="card p-3">
+    <div class="card p-2">
       <div class="card-body">
-        <h4>{{groups.name}} group</h4>
-        <p>{{groups.users.length}} {{groups.users.length == 1 ? 'member' : 'members'}}</p>
+        <p><strong>{{groups.users.length}} {{groups.users.length == 1 ? 'member' : 'members'}}</strong></p>
         <hr>
         <ul class="list-group">
           <li *ngFor="let user of groups.users" class="list-group-item py-2">

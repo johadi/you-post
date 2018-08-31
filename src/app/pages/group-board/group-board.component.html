@@ -7,6 +7,9 @@
     <div class="col-sm-9 pl-0 pr-0" id="main">
       <div class="card text-center">
         <div class="card-header">
+          <span class="badge badge-pill badge-display px-2 py-2 mt-2 mr-lg-4 float-right">
+          {{groupName$ | async}}
+        </span>
           <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
               <a class="nav-link text-display"
@@ -23,7 +26,7 @@
                  routerLinkActive="btn btn-sm btn-outline-display"
                  [routerLink]="'/group/'+groupId+'/send-message'"
               >
-                <i class="fa fa-commenting" aria-hidden="true"></i> Post message
+                <i class="fa fa-commenting" aria-hidden="true"></i> Send message
               </a>
             </li>
             <li class="nav-item">

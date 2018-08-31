@@ -14,6 +14,7 @@ import { GroupService } from './services/group.service';
 import { httpInterceptorProviders } from './interceptors';
 import { AuthGuard } from './guards/auth.guard';
 import { environment } from '../environments/environment';
+import {GroupResolverService} from './resolvers/group-resolver.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { environment } from '../environments/environment';
     PagesModule,
     AppRoutingModule
   ],
-  providers: [UserService, AuthService, GroupService, httpInterceptorProviders, AuthGuard],
+  providers: [UserService, AuthService, GroupService, httpInterceptorProviders, AuthGuard, GroupResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

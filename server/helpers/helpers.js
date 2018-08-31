@@ -176,7 +176,12 @@ const updateUserDetails = (req, res, fields) => {
         return Promise.reject('Something went wrong');
       }
 
-      return user.update(fields);
+      const fieldsInLowercase = {};
+      Object.keys(fields).forEach((key) => {
+        fieldsInLowercase[key] = fields[key].toLowerCase();
+      });
+
+      return user.update(fieldsInLowercase);
     })
     .then((updatedUser) => {
       return handleSuccess(

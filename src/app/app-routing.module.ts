@@ -14,6 +14,7 @@ import {GroupMessagesComponent} from './pages/group-messages/group-messages.comp
 import {AddUserComponent} from './pages/add-user/add-user.component';
 import { IndexPageComponent } from './pages/index-page/index-page.component';
 import { UserResolverService } from './resolvers/user-resolver.service';
+import { GroupResolverService } from './resolvers/group-resolver.service';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
     path: 'group/:id',
     component:  GroupBoardComponent,
     canActivate: [AuthGuard],
-    resolve: { userResolver: UserResolverService },
+    resolve: { groupResolver: GroupResolverService },
     children: [
       { path: '', component: GroupMessagesComponent  },
       { path: 'users', component:  GroupUsersComponent },
