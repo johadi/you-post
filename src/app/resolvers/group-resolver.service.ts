@@ -13,7 +13,7 @@ export class GroupResolverService implements Resolve<any> {
   resolve(routeSnapshot: ActivatedRouteSnapshot, stateSnapshot: RouterStateSnapshot) {
     return this.groupService.getGroupDetails(routeSnapshot.params.id)
       .pipe(catchError((error) => {
-        this.router.navigate(['/404']);
+        this.router.navigate(['/not-found']);
         return throwError(error);
       }));
   }
