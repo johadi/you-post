@@ -1,8 +1,8 @@
 .container-fluid{
   background-color: #0f054b;
   text-align: center;
-  color: #ffffff;
-  background-image: url("../../../assets/images/people.png");
+  color: #f7f7f7;
+  background-image: url("../../../assets/images/family_elder.jpg");
   background-repeat: no-repeat;
   height: 100vh;
   background-size: 100% 100%;
@@ -14,7 +14,7 @@
   position: absolute;
   left: 0; right: 0;
   top: 0; bottom: 0;
-  background: rgba(0,0,0,.8);
+  background: rgba(0,0,0,.5);
 }
 .header-text{
   color: #ffffff;
@@ -66,4 +66,36 @@
   //text-shadow: 3px 2px blue;
   font-family: "Times New Roman", Times, serif;
   font-size: 60px;
+}
+
+.no-radius {
+  border-radius: 0;
+}
+
+.btn-login {
+  color: #fff;
+  font-weight: bold;
+  background-color: #120591;
+  border-color: #120591;
+}
+
+.btn-login:hover {
+  line-height: 30px;
+  color: #fff;
+  background-color: #1305da;
+  border-color: #1305da;
+}
+.btn-register {
+  color: #120591;
+  font-weight: bold;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-register:hover {
+  line-height: 30px;
+  color: #120591;
+  font-weight: bold;
+  background-color: #d6d6d6;
+  border-color: #d6d6d6;
 }

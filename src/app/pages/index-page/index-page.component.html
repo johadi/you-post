@@ -4,22 +4,22 @@
     <p>YouPost</p>
   </div>
   <div class="row main-wrapper">
-    <div class="offset-3 col-6 inner-wrapper">
+    <div class="offset-1 col-10 offset-sm-3 col-sm-6 inner-wrapper">
       <h1 class="heading-text">YouPost</h1>
-      <p>We understand <strong>Communication</strong> is a mainstay in building a successful relationship, career, and happy family. We are here to help you realize that.</p>
+      <p><strong>Communication</strong> is a cornerstone in staying connected to people you ever know. With <strong>YouPost,</strong> you can send messages to family, friends, and loved ones.</p>
+      <p class="mb-3"><strong>Join and keep yourself updated</strong></p>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-success mr-1" data-toggle="modal" data-target="#signinModal">
+      <button type="button" class="no-radius btn btn-login mr-1" data-toggle="modal" data-target="#signinModal">
         Login now
       </button>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary ml-1" data-toggle="modal" data-target="#signupModal">
+      <button type="button" class="no-radius btn btn-register ml-1" data-toggle="modal" data-target="#signupModal">
         Register now
       </button>
-      <hr>
     </div>
   </div>
   <div class="row footer">
-    <p>Copyright &copy; Johadi YouPost 2018</p>
+    <p>Copyright &copy; Jimoh Hadi YouPost 2018</p>
   </div>
 </div>
 
@@ -111,12 +111,6 @@
               class="form-text text-danger">{{signinValidationError['password']}}
             </small>
           </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input">
-              Remember me
-            </label>
-          </div>
           <button (click)="onSignin()" type="submit" class="btn btn-primary btn-display">Signin</button>
         </form>
         <br>
@@ -142,8 +136,8 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email you used for registration">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+            <small id="emailHelp" class="form-text text-muted">Enter email you used for registration</small>
           </div>
           <button type="submit" class="btn btn-dark btn-block">Send my password recovery link</button>
         </form>
